@@ -1,9 +1,10 @@
+package Modele;
 
 public class Joueur {
 	
-	String nom;
-	int point;
-	char[] lettre;
+	public String nom;
+	public int point;
+	public char[] lettre;
 	
 	public Joueur(String name) {
 		

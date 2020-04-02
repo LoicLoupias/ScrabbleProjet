@@ -1,11 +1,13 @@
-import java.awt.Button;
+package Vue;
+
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import Modele.Joueur;
 
 public class vueLettre extends JPanel{
 	

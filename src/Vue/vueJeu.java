@@ -1,6 +1,10 @@
+package Vue;
+
 import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
+
+import Modele.Joueur;
 
 public class vueJeu extends JPanel {
 	

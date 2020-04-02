@@ -1,6 +1,12 @@
+package Vue;
+
 import java.awt.BorderLayout;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import Modele.Joueur;
+import Modele.Modele;
 
 
 public class Vue extends JFrame {

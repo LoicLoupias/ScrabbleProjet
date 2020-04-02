@@ -1,8 +1,12 @@
+package Vue;
+
 import java.awt.FlowLayout;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import Modele.Joueur;
 
 
 public class vuePoints extends JPanel {

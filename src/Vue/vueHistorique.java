@@ -24,7 +24,7 @@ public class vueHistorique extends JPanel {
 		super();
 		
 		historique = new ArrayList<JLabel>();
-		historique.add(new JLabel("HISOTORIQUE"));
+		historique.add(new JLabel("HISTORIQUE"));
 		
 		//this.setPreferredSize(new Dimension(500, 100));
 		

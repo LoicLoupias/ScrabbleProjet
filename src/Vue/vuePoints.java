@@ -38,7 +38,7 @@ public class vuePoints extends JPanel {
 		}
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.add(new JLabel("Joueur"));
+		this.add(new JLabel("Joueurs"));
 		this.add(pointTab);
 		
 		

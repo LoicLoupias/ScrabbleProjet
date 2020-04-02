@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 public class PlateauDeJeu extends JPanel implements WindowListener {
     
-	//Column[] colonne;
+	JButton[][] boutonTab;
 	
 	public PlateauDeJeu() {
 		
@@ -24,12 +24,12 @@ public class PlateauDeJeu extends JPanel implements WindowListener {
 		layout.setVgap(0);
 		this.setLayout(layout);
 		
-		JButton[][] boutonTab = new JButton[Vue.SIZE][Vue.SIZE];
+		boutonTab = new JButton[Vue.SIZE][Vue.SIZE];
 		
 		//Define new buttons
 		for (int i = 0; i<Vue.SIZE; i++) {
 			for(int j=0; j<Vue.SIZE; j++) {
-				boutonTab[i][j] = new JButton("");
+				boutonTab[i][j] = new JButton(Integer.toString(i));
 				boutonTab[i][j].setPreferredSize(new Dimension(50,50));
 				boutonTab[i][j].setBackground(new Color(0,200,0));
 				boutonTab[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -37,22 +37,22 @@ public class PlateauDeJeu extends JPanel implements WindowListener {
 			}
 		}
 		
-		/* TEST TEST TEST TEST TEST
-		 * System.out.println(Vue.md[3][0]);
-		 FIN TEST FIN TEST FIN TEST */
 		
-		//for (int n=0; n<Vue.md.length;n++) {
-			//boutonTab[Vue.md[n][0]][Vue.md[n][1]].setBackground(Color.PINK);
-		//}
-		//for (int n=0; n<Vue.ld.length;n++) {
-			//boutonTab[Vue.ld[n][0]][Vue.ld[n][1]].setBackground(Color.CYAN);
-		//}
-		//for (int n=0; n<Vue.mt.length;n++) {
-			//boutonTab[Vue.mt[n][0]][Vue.mt[n][1]].setBackground(Color.RED);
-		//}
-		//for (int n=0; n<Vue.lt.length;n++) {
-			//boutonTab[Vue.lt[n][0]][Vue.lt[n][1]].setBackground(Color.BLUE);
-		//}
+		//System.out.println(Vue.md.length);
+		
+		
+		for (int n=0; n<Vue.md.length;n++) {
+			boutonTab[Vue.md[n][0]][Vue.md[n][1]].setBackground(Color.PINK);
+		}
+		for (int n=0; n<Vue.ld.length;n++) {
+			boutonTab[Vue.ld[n][0]][Vue.ld[n][1]].setBackground(Color.CYAN);
+		}
+		for (int n=0; n<Vue.mt.length;n++) {
+			boutonTab[Vue.mt[n][0]][Vue.mt[n][1]].setBackground(Color.RED);
+		}
+		for (int n=0; n<Vue.lt.length;n++) {
+			boutonTab[Vue.lt[n][0]][Vue.lt[n][1]].setBackground(Color.BLUE);
+		}
 		
 	
 		

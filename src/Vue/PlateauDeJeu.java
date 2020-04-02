@@ -14,13 +14,51 @@ import javax.swing.JPanel;
 
 public class PlateauDeJeu extends JPanel implements WindowListener {
     
-	Column[] colonne;
+	//Column[] colonne;
 	
 	public PlateauDeJeu() {
 		
 		this.setPreferredSize(new Dimension(50*15, 50*15));
-		this.setLayout(new FlowLayout());
+		FlowLayout layout = new FlowLayout();
+		layout.setHgap(0);
+		layout.setVgap(0);
+		this.setLayout(layout);
 		
+		JButton[][] boutonTab = new JButton[Vue.SIZE][Vue.SIZE];
+		
+		//Define new buttons
+		for (int i = 0; i<Vue.SIZE; i++) {
+			for(int j=0; j<Vue.SIZE; j++) {
+				boutonTab[i][j] = new JButton("");
+				boutonTab[i][j].setPreferredSize(new Dimension(50,50));
+				boutonTab[i][j].setBackground(new Color(0,200,0));
+				boutonTab[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+				this.add(boutonTab[i][j]);
+			}
+		}
+		
+		/* TEST TEST TEST TEST TEST
+		 * System.out.println(Vue.md[3][0]);
+		 FIN TEST FIN TEST FIN TEST */
+		
+		//for (int n=0; n<Vue.md.length;n++) {
+			//boutonTab[Vue.md[n][0]][Vue.md[n][1]].setBackground(Color.PINK);
+		//}
+		//for (int n=0; n<Vue.ld.length;n++) {
+			//boutonTab[Vue.ld[n][0]][Vue.ld[n][1]].setBackground(Color.CYAN);
+		//}
+		//for (int n=0; n<Vue.mt.length;n++) {
+			//boutonTab[Vue.mt[n][0]][Vue.mt[n][1]].setBackground(Color.RED);
+		//}
+		//for (int n=0; n<Vue.lt.length;n++) {
+			//boutonTab[Vue.lt[n][0]][Vue.lt[n][1]].setBackground(Color.BLUE);
+		//}
+		
+	
+		
+	}
+	
+	/*
 		colonne = new Column[15];
 		
 		for (int i = 0; i<15; i++) {
@@ -45,8 +83,10 @@ public class PlateauDeJeu extends JPanel implements WindowListener {
 	    	colonne[14 - Vue.LETTRE_TRIPLE[i][0]].getComponent(14 -Vue.LETTRE_TRIPLE[i][1]).setBackground(Color.BLUE);
 	    }
 	}
+	*/
 
-
+	
+	/*
 	public class Column extends JPanel {
 		
 		JButton [] boutonTab = new JButton[Vue.SIZE];
@@ -72,6 +112,7 @@ public class PlateauDeJeu extends JPanel implements WindowListener {
 			}
 		}
 	}
+	*/
 
 
 	public void windowActivated(WindowEvent arg0) {

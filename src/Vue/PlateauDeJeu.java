@@ -16,6 +16,7 @@ public class PlateauDeJeu extends JPanel implements WindowListener {
     
 	JButton[][] boutonTab;
 	
+	@SuppressWarnings("deprecation")
 	public PlateauDeJeu() {
 		
 		this.setPreferredSize(new Dimension(50*15, 50*15));
@@ -29,7 +30,7 @@ public class PlateauDeJeu extends JPanel implements WindowListener {
 		//Define new buttons
 		for (int i = 0; i<Vue.SIZE; i++) {
 			for(int j=0; j<Vue.SIZE; j++) {
-				boutonTab[i][j] = new JButton(Integer.toString(i));
+				boutonTab[i][j] = new JButton();
 				boutonTab[i][j].setPreferredSize(new Dimension(50,50));
 				boutonTab[i][j].setBackground(new Color(0,200,0));
 				boutonTab[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -41,17 +42,22 @@ public class PlateauDeJeu extends JPanel implements WindowListener {
 		//System.out.println(Vue.md.length);
 		
 		
-		for (int n=0; n<Vue.md.length;n++) {
-			boutonTab[Vue.md[n][0]][Vue.md[n][1]].setBackground(Color.PINK);
+		for (int n=0; n<Vue.MD.length;n++) {
+			boutonTab[Vue.MD[n][0]][Vue.MD[n][1]].setBackground(Color.PINK);
+			boutonTab[Vue.MD[n][0]][Vue.MD[n][1]].setText("MD");
 		}
-		for (int n=0; n<Vue.ld.length;n++) {
-			boutonTab[Vue.ld[n][0]][Vue.ld[n][1]].setBackground(Color.CYAN);
+		for (int n=0; n<Vue.LD.length;n++) {
+			boutonTab[Vue.LD[n][0]][Vue.LD[n][1]].setBackground(Color.CYAN);
+			boutonTab[Vue.LD[n][0]][Vue.LD[n][1]].setText("LD");
 		}
-		for (int n=0; n<Vue.mt.length;n++) {
-			boutonTab[Vue.mt[n][0]][Vue.mt[n][1]].setBackground(Color.RED);
+		for (int n=0; n<Vue.MT.length;n++) {
+			boutonTab[Vue.MT[n][0]][Vue.MT[n][1]].setBackground(Color.RED);
+			boutonTab[Vue.MT[n][0]][Vue.MT[n][1]].setText("MT");
+			
 		}
-		for (int n=0; n<Vue.lt.length;n++) {
-			boutonTab[Vue.lt[n][0]][Vue.lt[n][1]].setBackground(Color.BLUE);
+		for (int n=0; n<Vue.LT.length;n++) {
+			boutonTab[Vue.LT[n][0]][Vue.LT[n][1]].setBackground(Color.BLUE);
+			boutonTab[Vue.LT[n][0]][Vue.LT[n][1]].setText("LT");
 		}
 		
 	

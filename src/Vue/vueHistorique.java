@@ -2,6 +2,7 @@ package Vue;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Label;
 import java.awt.List;
 import java.util.ArrayList;
 import java.util.Queue;
@@ -18,19 +19,22 @@ import javax.swing.JTextArea;
 public class vueHistorique extends JPanel {
 	
 	ArrayList<JLabel> historique; 
+	JLabel titre;
 	
 	public vueHistorique() {
 		
 		super();
 		
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
 		historique = new ArrayList<JLabel>();
-		historique.add(new JLabel("HISTORIQUE"));
+		
+		this.titre = new JLabel("HISTORIQUE");
+		this.titre.setHorizontalAlignment(titre.CENTER);
 		
 		//this.setPreferredSize(new Dimension(500, 100));
 		
-	
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.add(historique.get(0));
+		this.add(titre);
 		
 		
 	}

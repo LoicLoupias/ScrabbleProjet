@@ -1,6 +1,7 @@
 package Vue;
 
 import java.awt.FlowLayout;
+import java.awt.Label;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -12,6 +13,7 @@ import Modele.Joueur;
 public class vuePoints extends JPanel {
 	
 	Joueur[] joueur;
+	JLabel titre;
 	
 	public vuePoints(Joueur[] jou) {
 		
@@ -38,7 +40,9 @@ public class vuePoints extends JPanel {
 		}
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.add(new JLabel("Joueurs"));
+		this.titre = new JLabel("JOUEURS");
+		this.titre.setHorizontalAlignment(titre.CENTER);
+		this.add(titre);
 		this.add(pointTab);
 		
 		

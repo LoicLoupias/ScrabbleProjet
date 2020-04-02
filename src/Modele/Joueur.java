@@ -1,16 +1,18 @@
 package Modele;
 
+import java.util.ArrayList;
+
 public class Joueur {
 	
 	public String nom;
 	public int point;
-	public char[] lettre;
+	public ArrayList<Character> lettre;
 	
 	public Joueur(String name) {
 		
 		nom = name;
 		point = 0;
-		lettre = new char[7];
+		lettre = new ArrayList<Character>();
 		
 	}
 	

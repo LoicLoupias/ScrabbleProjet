@@ -3,6 +3,7 @@ package Vue;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -24,7 +25,7 @@ public class PlateauDeJeu extends JPanel implements WindowListener {
 		
 		for (int i = 0; i<15; i++) {
 			this.colonne[i] = new Column();
-			this.colonne[i].setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+			//this.colonne[i].setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 			this.add(colonne[i]);
 		}
 	    for(int i = 0; i<Vue.MOT_DOUBLE.length; i++) {
@@ -63,9 +64,9 @@ public class PlateauDeJeu extends JPanel implements WindowListener {
 					
 			// Define new buttons
 			for (int i = 0; i<Vue.SIZE; i++) {
-				boutonTab[i] = new JButton(Integer.toString(i));
+				boutonTab[i] = new JButton("case vide");
 				boutonTab[i].setPreferredSize(new Dimension(100, 100));
-				boutonTab[i].setBackground(new Color(249,228,183));
+				boutonTab[i].setBackground(new Color(0,200,0));
 				this.boutonTab[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
 				this.add(boutonTab[i]);
 			}

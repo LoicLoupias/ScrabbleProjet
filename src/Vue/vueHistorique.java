@@ -17,21 +17,20 @@ import javax.swing.JTextArea;
 
 public class vueHistorique extends JPanel {
 	
-	JScrollPane historique; 
+	ArrayList<JLabel> historique; 
 	
 	public vueHistorique() {
 		
 		super();
-		JTextArea test = new JTextArea(10,50);
-		historique = new JScrollPane(test);
 		
+		historique = new ArrayList<JLabel>();
+		historique.add(new JLabel("HISOTORIQUE"));
 		
 		//this.setPreferredSize(new Dimension(500, 100));
 		
 	
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.add(new JLabel("HISTORIQUE"));
-		this.add(historique);
+		this.add(historique.get(0));
 		
 		
 	}

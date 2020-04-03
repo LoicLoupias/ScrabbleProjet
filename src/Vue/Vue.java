@@ -22,29 +22,13 @@ public class Vue extends JFrame {
 	static int[][] MT = {{0,0}, {0,7}, {0,14}, {7,0}, {7,14}, {14,0}, {14,7}, {14,14}};
 	static int[][] LT = {{1,5}, {1,9}, {5,1}, {5,5}, {5,9}, {5,13}, {9,1}, {9,5}, {9,9}, {9,13}, {13,5}, {13,9}};
 	
-	String[] nombre = {"1", "2", "3", "4"};	
-	Joueur[] joueur;
-	
 	public Vue() {
 		super("Sccrable");
 	    	
-	    int nombreJoueur = Integer.parseInt((String) JOptionPane.showInputDialog(null, 
-	    	      "Veuillez selectionner le nombre de joueur :",
-	    	      "Scrabble",
-	    	      JOptionPane.QUESTION_MESSAGE,
-	    	      null,
-	    	      nombre,
-	    	      nombre[0]));
-	    
-	    joueur = new Joueur[nombreJoueur];
-	    for (int i = 1; i<=nombreJoueur; i++) {
-	        joueur[i-1] = new Joueur(JOptionPane.showInputDialog(null, "Entrez le nom pour le joueur " + i + " :", "Scrabble", JOptionPane.QUESTION_MESSAGE));
-	    }
-		
 		this.setLayout(new BorderLayout());
 	    this.setResizable(false);
 	    
-	    Modele modele = new Modele(joueur);
+	    Modele modele = new Modele();
 	    
 	    PlateauDeJeu plateau = new PlateauDeJeu();
 	    this.add(plateau, BorderLayout.WEST);

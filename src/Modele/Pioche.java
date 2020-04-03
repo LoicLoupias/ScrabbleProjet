@@ -20,19 +20,19 @@ public class Pioche {
 				lettre.add((char)('A' + i));
 			}
 		}
-		
-		System.out.println(this.lettre.toString());
-		Collections.shuffle(lettre);
-		System.out.println(this.lettre.toString());
+		Collections.shuffle(this.lettre);
 		
 	}
 	
-	public ArrayList<Character> piocher(ArrayList<Character> lettreJou, Integer nbr) {
+	public ArrayList<Character> piocher(Integer nbr) {
+		
+		ArrayList<Character> lettrePioché = new ArrayList<Character>();
 		
 		for (int i = 0; i<this.lettre.size() && i<nbr; i++) {
-			lettreJou.add(this.lettre.remove(0));
+			lettrePioché.add(this.lettre.remove(0));
 		}
-		return lettreJou;
+		
+		return lettrePioché;
 		
 	}
 

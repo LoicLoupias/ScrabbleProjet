@@ -1,6 +1,9 @@
 package Modele;
 
 import java.util.Map;
+
+import javax.swing.JOptionPane;
+
 import static java.util.Map.entry;
 
 import java.util.Collection;
@@ -10,6 +13,8 @@ public class Modele {
 	
 	public Joueur[] joueurs;
 	public Pioche pioche;
+	String[] nombre = {"1", "2", "3", "4"};	
+
 	
 	public static Map<Character, Integer[]> LETTRES = Map.ofEntries(
 			entry('A', new Integer[] {1, 9}),	entry('B', new Integer[] {3, 2}), entry('C', new Integer[] {3, 2}),
@@ -25,16 +30,28 @@ public class Modele {
 
 	public Etat etat;
 
-	public Modele(Joueur[] jou) {
+	public Modele() {
 		
-		joueurs = jou;
 		
+		
+		int nombreJoueur = Integer.parseInt((String) JOptionPane.showInputDialog(null, 
+	    	      "Veuillez selectionner le nombre de joueur :",
+	    	      "Scrabble",
+	    	      JOptionPane.QUESTION_MESSAGE,
+	    	      null,
+	    	      nombre,
+	    	      nombre[0]));
+	    
+	    joueurs = new Joueur[nombreJoueur];
+	    for (int i = 1; i<=nombreJoueur; i++) {
+	        joueurs[i-1] = new Joueur(JOptionPane.showInputDialog(null, "Entrez le nom pour le joueur " + i + " :", "Scrabble", JOptionPane.QUESTION_MESSAGE));
+	    }
 		this.etat = Etat.EN_COURS;
 		
 		pioche = new Pioche();
 		
 		for (int i = 0; i < joueurs.length; i++) {
-			joueurs[i].lettre.retainAll(pioche.piocher(jou[i].lettre, 7));
+			joueurs[i].lettre.addAll(pioche.piocher(7));
 		}	
 		
 	}

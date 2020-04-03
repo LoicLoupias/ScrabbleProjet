@@ -26,13 +26,13 @@ public class Pioche {
 	
 	public ArrayList<Character> piocher(Integer nbr) {
 		
-		ArrayList<Character> lettrePioché = new ArrayList<Character>();
+		ArrayList<Character> lettrePioche = new ArrayList<Character>();
 		
 		for (int i = 0; i<this.lettre.size() && i<nbr; i++) {
-			lettrePioché.add(this.lettre.remove(0));
+			lettrePioche.add(this.lettre.remove(0));
 		}
 		
-		return lettrePioché;
+		return lettrePioche;
 		
 	}
 

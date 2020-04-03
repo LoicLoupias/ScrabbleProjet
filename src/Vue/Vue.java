@@ -33,7 +33,7 @@ public class Vue extends JFrame {
 	    PlateauDeJeu plateau = new PlateauDeJeu();
 	    this.add(plateau, BorderLayout.WEST);
 	      
-	    vueJeu vueDuJeu = new vueJeu(modele.joueurs);
+	    vueJeu vueDuJeu = new vueJeu(modele);
 	    this.add(vueDuJeu, BorderLayout.CENTER);
 	    
 	    this.pack();

@@ -6,13 +6,15 @@ import javax.swing.JOptionPane;
 
 import static java.util.Map.entry;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class Modele {
 	
 	public Joueur[] joueurs;
 	public Pioche pioche;
+	public ArrayList<String> historique;
 	String[] nombre = {"1", "2", "3", "4"};	
 
 	
@@ -46,9 +48,11 @@ public class Modele {
 	    for (int i = 1; i<=nombreJoueur; i++) {
 	        joueurs[i-1] = new Joueur(JOptionPane.showInputDialog(null, "Entrez le nom pour le joueur " + i + " :", "Scrabble", JOptionPane.QUESTION_MESSAGE));
 	    }
+	    
 		this.etat = Etat.EN_COURS;
 		
-		pioche = new Pioche();
+		this.pioche = new Pioche();
+		this.historique = new ArrayList<String>(Arrays.asList(("HISTORIQUE")));
 		
 		for (int i = 0; i < joueurs.length; i++) {
 			joueurs[i].lettre.addAll(pioche.piocher(7));

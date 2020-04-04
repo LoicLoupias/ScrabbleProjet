@@ -9,9 +9,21 @@ import java.awt.event.ItemListener;
 import java.util.Observable;
 import java.util.Observer;
 
+import Modele.Modele;
+import Vue.PlateauDeJeu;
+import Vue.vueJeu;
+
 @SuppressWarnings("deprecation")
 public class Controleur implements ContainerListener, ActionListener, ItemListener, Observer {
-
+	
+	public Controleur(Modele modele, vueJeu vueDuJeu, PlateauDeJeu plateau) {
+		
+		//while (modele.etat == modele.etat.EN_COURS) {
+			
+		//}
+		
+	}
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub

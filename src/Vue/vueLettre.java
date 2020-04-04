@@ -30,12 +30,12 @@ public class vueLettre extends JPanel{
 		this.lettres = new JButton[7];
 		
 		for (int i = 0; i<7; i++) {
-			this.lettres[i] = new JButton();
+			this.lettres[i] = new JButton("test");
 			this.lettres[i].setPreferredSize(new Dimension(50,50));
 			this.lettres[i].setBackground(new Color(245,245,220));
-			this.lettres[i].setText(Character.toString(this.joueur.lettre.get(i)));
 			this.lettres[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			this.lettres[i].addActionListener(new LettreListener());
+			this.lettres[i].setVisible(false);
 			this.add(lettres[i]);
 		}
 	}
@@ -45,10 +45,11 @@ public class vueLettre extends JPanel{
 	}
 
 	
-	public void changeMain(int nbr) {
+	public void afficheMain(int numeroJ) {
 		
-		for (int i = 0; i<7; i++) {
-			this.lettres[i].setText(Character.toString(this.joueur.lettre.get(i)));
+		for (int i = 0; i < this.joueur[numeroJ].lettre.size(); i++) {
+			this.lettres[i].setText(Character.toString(this.joueur[numeroJ].lettre.get(i)));
+			this.lettres[i].setVisible(true);
 		}
 		
 	}

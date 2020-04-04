@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.Label;
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -22,34 +24,28 @@ import javax.swing.SwingConstants;
 public class vueHistorique extends JPanel {
 	
 	public ArrayList<JLabel> historique; 
-	JLabel titre;
 	
-	public vueHistorique(ArrayList<String> hst) {
+	public vueHistorique() {
 		
 		super();
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		Iterator<String> it = hst.iterator();
-		while (it.hasNext()) {
-			historique.add(new JLabel(it.next()));
-		}
-		
-		this.titre.setHorizontalAlignment(SwingConstants.CENTER);
+		this.historique = new ArrayList<JLabel>();
+		historique.add(new JLabel("HISTORIQUE"));
+		this.add(historique.get(0));
 		
 		//this.setPreferredSize(new Dimension(500, 100));
 		
-		this.add(titre);
 		
 		
 	}
 	
-	@Override
-	public void paint(Graphics g) {
+	public void ajoutHistorique(String mot) {
 		
-		super.paint(g);
-		this.add(this.historique.get(this.historique.size()));
+		this.historique.add(new JLabel(mot));
+		this.add(this.historique.get(this.historique.size() - 1));
+		
 		
 	}
-
 }

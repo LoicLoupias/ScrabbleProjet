@@ -14,9 +14,7 @@ public class Modele {
 	
 	public Joueur[] joueurs;
 	public Pioche pioche;
-	public ArrayList<String> historique;
-	String[] nombre = {"1", "2", "3", "4"};	
-
+	public Integer nbrJoueur;
 	
 	public static Map<Character, Integer[]> LETTRES = Map.ofEntries(
 			entry('A', new Integer[] {1, 9}),	entry('B', new Integer[] {3, 2}), entry('C', new Integer[] {3, 2}),
@@ -28,7 +26,7 @@ public class Modele {
 			entry('X', new Integer[] {10, 1}), entry('Y', new Integer[] {10, 1}), entry('Z', new Integer[] {10, 1}), entry('*', new Integer[] {0, 2}));
 			
 	
-	enum Etat {EN_COURS, GAGNE, PERDU};
+	public enum Etat {EN_COURS, GAGNE, PERDU};
 
 	public Etat etat;
 
@@ -36,28 +34,21 @@ public class Modele {
 		
 		
 		
-		int nombreJoueur = Integer.parseInt((String) JOptionPane.showInputDialog(null, 
+		nbrJoueur = (Integer) JOptionPane.showInputDialog(null, 
 	    	      "Veuillez selectionner le nombre de joueur :",
 	    	      "Scrabble",
 	    	      JOptionPane.QUESTION_MESSAGE,
 	    	      null,
-	    	      nombre,
-	    	      nombre[0]));
+	    	      new Integer[] {1,2,3,4}, 2);
 	    
-	    joueurs = new Joueur[nombreJoueur];
-	    for (int i = 1; i<=nombreJoueur; i++) {
+	    joueurs = new Joueur[nbrJoueur];
+	    for (int i = 1; i<=nbrJoueur; i++) {
 	        joueurs[i-1] = new Joueur(JOptionPane.showInputDialog(null, "Entrez le nom pour le joueur " + i + " :", "Scrabble", JOptionPane.QUESTION_MESSAGE));
 	    }
 	    
 		this.etat = Etat.EN_COURS;
-		
 		this.pioche = new Pioche();
-		this.historique = new ArrayList<String>(Arrays.asList(("HISTORIQUE")));
-		
-		for (int i = 0; i < joueurs.length; i++) {
-			joueurs[i].lettre.addAll(pioche.piocher(7));
+			
 		}	
-		
-	}
 	
 }

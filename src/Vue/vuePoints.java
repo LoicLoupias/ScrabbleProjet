@@ -13,7 +13,6 @@ import Modele.Joueur;
 public class vuePoints extends JPanel {
 	
 	Joueur[] joueur;
-	JLabel titre;
 	
 	public vuePoints(Joueur[] jou) {
 		
@@ -40,8 +39,10 @@ public class vuePoints extends JPanel {
 		}
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.titre = new JLabel("JOUEURS");
-		this.titre.setHorizontalAlignment(titre.CENTER);
+		
+		JLabel titre = new JLabel("JOUEURS");
+		titre.setHorizontalAlignment(titre.CENTER);
+		
 		this.add(titre);
 		this.add(pointTab);
 		

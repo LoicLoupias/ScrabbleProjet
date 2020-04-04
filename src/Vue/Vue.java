@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import Controleur.Controleur;
 import Modele.Joueur;
 import Modele.Modele;
 
@@ -26,19 +27,43 @@ public class Vue extends JFrame {
 		super("Sccrable");
 	    	
 		this.setLayout(new BorderLayout());
-	    this.setResizable(false);
+	    //this.setResizable(false);
+	    
+	    	    
+	    PlateauDeJeu plateau = new PlateauDeJeu();
+	    this.add(plateau, BorderLayout.WEST);
 	    
 	    Modele modele = new Modele();
 	    
-	    PlateauDeJeu plateau = new PlateauDeJeu();
-	    this.add(plateau, BorderLayout.WEST);
-	      
 	    vueJeu vueDuJeu = new vueJeu(modele);
 	    this.add(vueDuJeu, BorderLayout.CENTER);
+	   
+	    Controleur control = new Controleur(modele, vueDuJeu, plateau);
+	    
+	    /*
+	    vuePoints points = new vuePoints(modele.joueurs);
+	    //points.setSize(new Dimension(this.getWidth(), 150));
+	    this.add(points, BorderLayout.NORTH);
+	    
+	    vueHistorique historique = new vueHistorique();
+	    //historique.setSize(new Dimension(this.getWidth(), 500));
+	    this.add(historique, BorderLayout.CENTER);
+	    
+	    vueLettre main = new vueLettre(modele);
+	    main.afficheMain(0);
+	    //main.setSize(new Dimension(this.getWidth(), 50));
+	    this.add(main, BorderLayout.SOUTH);
+	    */
+	      
+	    
 	    
 	    this.pack();
 	    this.setVisible(true);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    
+	    JOptionPane.showMessageDialog(null, "Joueur suivant", "Scrabble", JOptionPane.NO_OPTION);
+	    vueDuJeu.historique.ajoutHistorique("test");
+	    vueDuJeu.main.afficheMain(0);
 	}
 	
 	public static void main(String [] args){

@@ -11,6 +11,9 @@ import Modele.Modele;
 public class vueJeu extends JPanel {
 	
 	Joueur[] joueur;
+	vuePoints points;
+	vueHistorique historique;
+	vueLettre main;
 	
 	public vueJeu (Modele modele) {
 		
@@ -20,16 +23,17 @@ public class vueJeu extends JPanel {
 		
 		this.setLayout(new BorderLayout());
 		
-		vuePoints points = new vuePoints(joueur);
+		points = new vuePoints(joueur);
 		//points.setSize(new Dimension(this.getWidth(), 150));
 	    this.add(points, BorderLayout.NORTH);
 	    
-	    vueHistorique historique = new vueHistorique(modele.historique);
+	    historique = new vueHistorique();
 	    //historique.setSize(new Dimension(this.getWidth(), 500));
 	    this.add(historique, BorderLayout.CENTER);
 	    
-	    vueLettre main = new vueLettre(modele);
+	    main = new vueLettre(modele);
 	    //main.setSize(new Dimension(this.getWidth(), 50));
+	    //main.afficheMain(0);
 	    this.add(main, BorderLayout.SOUTH);
 		
 	}

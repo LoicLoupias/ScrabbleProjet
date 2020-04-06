@@ -14,9 +14,19 @@ import Vue.PlateauDeJeu;
 import Vue.vueJeu;
 
 @SuppressWarnings("deprecation")
-public class Controleur implements ContainerListener, ActionListener, ItemListener, Observer {
+public class Controleur implements ContainerListener, ActionListener, ItemListener{
 	
 	public Controleur(Modele modele, vueJeu vueDuJeu, PlateauDeJeu plateau) {
+		
+		
+		
+		// pour mettre en place un jeton, on peut créer un objet de type char et en gros dès qu'on clique sur la pioche et que cet objet est vide
+		//alors on rajoute ce chart dans l'objet puis tant qu'il est pas vide alors on peut plus en ajouter, puis si le clic est sur un boutton du platteau
+		// alors on verifie s'il n'y a pas de lettre dans le boutton du plateau, s'il y en a pas alors on pop le charet on l'ajoute au bouton.
+		
+		
+		
+		
 		
 		//while (modele.etat == modele.etat.EN_COURS) {
 			
@@ -24,11 +34,6 @@ public class Controleur implements ContainerListener, ActionListener, ItemListen
 		
 	}
 	
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void itemStateChanged(ItemEvent e) {

@@ -29,8 +29,18 @@ public class Vue extends JFrame {
 		this.setLayout(new BorderLayout());
 	    //this.setResizable(false);
 	    
-	    	    
-	    PlateauDeJeu plateau = new PlateauDeJeu();
+		
+		
+		
+		
+	    // pour adapter le plateau à la fenetre il faudrait faire un if avec comme condition le fait que
+		// while(largeur du plateau< hauteur de fenetre && largeur-partie pour historique) comme ca la fenetre s'adapter à la taille de la fenetre
+	    
+		
+		
+		
+		
+		PlateauDeJeu plateau = new PlateauDeJeu();
 	    this.add(plateau, BorderLayout.WEST);
 	    
 	    Modele modele = new Modele();

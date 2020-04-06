@@ -28,7 +28,7 @@ public class Pioche {
 		
 		ArrayList<Character> lettrePioche = new ArrayList<Character>();
 		
-		for (int i = 0; i<this.lettre.size() && i<nbr; i++) {
+		while ( this.lettre.size()>0 || main.size()<7) {
 			lettrePioche.add(this.lettre.remove(0));
 		}
 		

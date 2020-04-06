@@ -1,5 +1,6 @@
 package Vue;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -30,7 +31,6 @@ public class vueHistorique extends JPanel {
 		super();
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
 		this.historique = new ArrayList<JLabel>();
 		historique.add(new JLabel("HISTORIQUE"));
 		this.add(historique.get(0));

@@ -1,8 +1,10 @@
 package Vue;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Label;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -33,9 +35,11 @@ public class vuePoints extends JPanel {
 		}
 		
 		JPanel pointTab = new JPanel();
-		pointTab.setLayout(new FlowLayout());
+		pointTab.setLayout(new BoxLayout(pointTab,BoxLayout.X_AXIS));
+		pointTab.add(Box.createRigidArea(new Dimension(75,10)));
 		for (int i = 0; i<pointJoueur.length; i++) {
 			pointTab.add(pointJoueur[i]);
+			pointTab.add(Box.createRigidArea(new Dimension(150,10)));
 		}
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

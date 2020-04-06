@@ -16,6 +16,8 @@ public class Modele {
 	public Pioche pioche;
 	public Integer nbrJoueur;
 	public Integer tour;
+
+
 	
 	public static Map<Character, Integer[]> LETTRES = Map.ofEntries(
 			entry('A', new Integer[] {1, 9}),	entry('B', new Integer[] {3, 2}), entry('C', new Integer[] {3, 2}),
@@ -35,7 +37,7 @@ public class Modele {
 		
 		this.etat = Etat.EN_COURS;
 		this.pioche = new Pioche();
-		
+
 		nbrJoueur = (Integer) JOptionPane.showInputDialog(null, 
 	    	      "Veuillez selectionner le nombre de joueur :",
 	    	      "Scrabble",
@@ -49,7 +51,9 @@ public class Modele {
 	        joueurs[i-1].lettre = pioche.piocher(joueurs[i-1].lettre); 
 	    }
 	    
+
 		tour = 0;
+
 			
 		}	
 	

@@ -24,15 +24,15 @@ public class Pioche {
 		
 	}
 	
-	public ArrayList<Character> piocher(Integer nbr) {
+	public ArrayList<Character> piocher(ArrayList<Character> mainJoueur) {
 		
-		ArrayList<Character> lettrePioche = new ArrayList<Character>();
+		ArrayList<Character> main = mainJoueur;
 		
-		for (int i = 0; i<this.lettre.size() && i<nbr; i++) {
-			lettrePioche.add(this.lettre.remove(0));
+		while (this.lettre.size() > 0 && main.size() < 7 ) {
+			main.add(this.lettre.remove(0));
 		}
 		
-		return lettrePioche;
+		return main;
 		
 	}
 

@@ -33,8 +33,8 @@ public class Vue extends JFrame {
 		
 		
 		
-	    // pour adapter le plateau à la fenetre il faudrait faire un if avec comme condition le fait que
-		// while(largeur du plateau< hauteur de fenetre && largeur-partie pour historique) comme ca la fenetre s'adapter à la taille de la fenetre
+	    // pour adapter le plateau ï¿½ la fenetre il faudrait faire un if avec comme condition le fait que
+		// while(largeur du plateau< hauteur de fenetre && largeur-partie pour historique) comme ca la fenetre s'adapter ï¿½ la taille de la fenetre
 	    
 		
 		
@@ -70,10 +70,10 @@ public class Vue extends JFrame {
 	    this.pack();
 	    this.setVisible(true);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    
+	    vueDuJeu.main.afficheMain(0);
 	    JOptionPane.showMessageDialog(null, "Joueur suivant", "Scrabble", JOptionPane.NO_OPTION);
 	    vueDuJeu.historique.ajoutHistorique("test");
-	    vueDuJeu.main.afficheMain(0);
+	    vueDuJeu.main.afficheMain(1);
 	}
 	
 	public static void main(String [] args){

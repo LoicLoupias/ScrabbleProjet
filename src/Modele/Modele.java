@@ -47,8 +47,8 @@ public class Modele {
 	    
 	    joueurs = new Joueur[nbrJoueur];
 	    for (int i = 1; i<=nbrJoueur; i++) {
-	        joueurs[i-1] = new Joueur(JOptionPane.showInputDialog(null, "Entrez le nom pour le joueur " + i + " :", "Scrabble", JOptionPane.QUESTION_MESSAGE));
-	        joueurs[i-1].lettre = pioche.piocher(joueurs[i-1].lettre); 
+	        joueurs[i-1] = new Joueur(JOptionPane.showInputDialog(null, "Entrez le nom pour le joueur " + i + " :", "Scrabble", JOptionPane.QUESTION_MESSAGE ), new ArrayList<Character>());
+	        joueurs[i-1].piocher();
 	    }
 	    
 

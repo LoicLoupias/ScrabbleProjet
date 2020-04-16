@@ -1,6 +1,7 @@
 package Vue;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -25,8 +26,9 @@ public class Vue extends JFrame {
 	
 	public Vue() {
 		super("Sccrable");
-	    	
-		this.setLayout(new BorderLayout());
+	    BorderLayout layout = new BorderLayout();	
+		this.setLayout(layout);
+		layout.setHgap(5);
 	    //this.setResizable(false);
 	    
 		
@@ -41,12 +43,12 @@ public class Vue extends JFrame {
 		
 		
 		PlateauDeJeu plateau = new PlateauDeJeu();
-	    this.add(plateau, BorderLayout.WEST);
+	    this.add(plateau, layout.WEST);
 	    
 	    Modele modele = new Modele();
 	    
 	    vueJeu vueDuJeu = new vueJeu(modele);
-	    this.add(vueDuJeu, BorderLayout.CENTER);
+	    this.add(vueDuJeu, layout.CENTER);
 	   
 	    Controleur control = new Controleur(modele, vueDuJeu, plateau);
 	    

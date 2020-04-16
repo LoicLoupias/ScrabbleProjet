@@ -1,7 +1,9 @@
 package Vue;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Label;
 
 import javax.swing.Box;
@@ -29,7 +31,11 @@ public class vuePoints extends JPanel {
 			pointJoueur[i] = new JPanel();
 			pointJoueur[i].setLayout(new BoxLayout(pointJoueur[i], BoxLayout.Y_AXIS));
 			JLabel nomJ = new JLabel(joueur[i].nom);
+			Font fontnomJ = new Font("Arial", Font.BOLD,16);
 			JLabel pointJ = new JLabel(Integer.toString(joueur[i].point));
+			Font fontpointJ = new Font("Arial", Font.BOLD,16);
+			nomJ.setFont(fontnomJ);
+			pointJ.setFont(fontpointJ);
 			pointJoueur[i].add(nomJ);
 			pointJoueur[i].add(pointJ);
 		}
@@ -41,10 +47,13 @@ public class vuePoints extends JPanel {
 			pointTab.add(pointJoueur[i]);
 			pointTab.add(Box.createRigidArea(new Dimension(150,10)));
 		}
-		
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		BoxLayout layoutvuePoints = new BoxLayout(this, BoxLayout.Y_AXIS);
+		this.setLayout(layoutvuePoints);
+		//this.setBackground(Color.DARK_GRAY);
 		
 		JLabel titre = new JLabel("JOUEURS");
+		Font font = new Font("Arial", Font.BOLD,20);
+		titre.setFont(font);
 		titre.setHorizontalAlignment(titre.CENTER);
 		
 		this.add(titre);

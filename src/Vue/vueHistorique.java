@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -34,6 +35,8 @@ public class vueHistorique extends JPanel {
 		this.historique = new ArrayList<JLabel>();
 		historique.add(new JLabel("HISTORIQUE"));
 		this.add(historique.get(0));
+		this.setBackground(Color.LIGHT_GRAY);
+		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
 		//this.setPreferredSize(new Dimension(500, 100));
 		

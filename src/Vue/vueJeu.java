@@ -21,7 +21,9 @@ public class vueJeu extends JPanel {
 		
 		joueur = modele.joueurs;
 		
-		this.setLayout(new BorderLayout());
+		BorderLayout layoutvueJeu = new BorderLayout();
+		this.setLayout(layoutvueJeu);
+		layoutvueJeu.setVgap(5);
 		
 		points = new vuePoints(joueur);
 		//points.setSize(new Dimension(this.getWidth(), 150));

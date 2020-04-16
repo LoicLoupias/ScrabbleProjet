@@ -24,9 +24,11 @@ public class vueLettre extends JPanel{
 		super();
 		
 		joueur = modele.joueurs;
-		
-		this.setLayout(new FlowLayout());
-		
+		FlowLayout layoutvueLettre = new FlowLayout();
+		this.setLayout(layoutvueLettre);
+		layoutvueLettre.setHgap(5);
+		this.setBackground(new Color(0,200,0));
+		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		this.lettres = new JButton[7];
 		
 		for (int i = 0; i<7; i++) {

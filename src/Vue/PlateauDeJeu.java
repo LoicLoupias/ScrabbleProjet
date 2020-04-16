@@ -28,8 +28,8 @@ public class PlateauDeJeu extends JPanel implements WindowListener {
 		layout.setVgap(0);
 		this.setLayout(layout);
 		*/
-		
-		this.setLayout(new GridLayout(15, 15));
+		GridLayout layoutPlateauDeJeu = new GridLayout(15,15);
+		this.setLayout(layoutPlateauDeJeu);
 		
 		boutonTab = new JButton[Vue.SIZE][Vue.SIZE];
 		

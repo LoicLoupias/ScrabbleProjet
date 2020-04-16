@@ -13,6 +13,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 public class PlateauDeJeu extends JPanel implements WindowListener {
     
@@ -35,19 +36,16 @@ public class PlateauDeJeu extends JPanel implements WindowListener {
 		
 		//Define new buttons
 		for (int i = 0; i<Vue.SIZE; i++) {
+			
 			for(int j=0; j<Vue.SIZE; j++) {
 				boutonTab[i][j] = new JButton();
 				boutonTab[i][j].setPreferredSize(new Dimension(50,50));
 				boutonTab[i][j].setBackground(new Color(0,200,0));
-				boutonTab[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+				boutonTab[i][j].setBorder(BorderFactory.createRaisedBevelBorder());
 				boutonTab[i][j].addActionListener(new BoutonListener());
 				this.add(boutonTab[i][j]);
 			}
 		}
-
-		
-		//System.out.println(Vue.md.length);
-		
 		
 		for (int n=0; n<Vue.MD.length;n++) {
 			boutonTab[Vue.MD[n][0]][Vue.MD[n][1]].setBackground(Color.PINK);

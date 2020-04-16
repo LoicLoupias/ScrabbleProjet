@@ -41,15 +41,15 @@ public class vuePoints extends JPanel {
 		}
 		
 		JPanel pointTab = new JPanel();
-		pointTab.setLayout(new BoxLayout(pointTab,BoxLayout.X_AXIS));
+		pointTab.setLayout(new FlowLayout());
 		pointTab.add(Box.createRigidArea(new Dimension(75,10)));
 		for (int i = 0; i<pointJoueur.length; i++) {
 			pointTab.add(pointJoueur[i]);
 			pointTab.add(Box.createRigidArea(new Dimension(150,10)));
 		}
 		BoxLayout layoutvuePoints = new BoxLayout(this, BoxLayout.Y_AXIS);
+		//layoutvuePoints.setVgap(5);
 		this.setLayout(layoutvuePoints);
-		//this.setBackground(Color.DARK_GRAY);
 		
 		JLabel titre = new JLabel("JOUEURS");
 		Font font = new Font("Arial", Font.BOLD,20);
@@ -57,6 +57,7 @@ public class vuePoints extends JPanel {
 		titre.setHorizontalAlignment(titre.CENTER);
 		
 		this.add(titre);
+		this.add(Box.createRigidArea(new Dimension(0,15)));
 		this.add(pointTab);
 		
 		

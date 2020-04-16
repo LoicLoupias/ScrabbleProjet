@@ -23,9 +23,9 @@ public class VueLettreBouton extends JPanel {
 		
 		
 		BorderLayout layoutVueLettreBouton = new BorderLayout();
-		this.setLayout(layoutVueLettreBouton);
 		layoutVueLettreBouton.setVgap(0);
-		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		this.setLayout(layoutVueLettreBouton);
+		this.setBorder(BorderFactory.createRaisedBevelBorder());
 		
 		main = new vueLettre(modele);
 		this.add(main,layoutVueLettreBouton.SOUTH);

@@ -36,7 +36,7 @@ public class vueHistorique extends JPanel {
 		historique.add(new JLabel("HISTORIQUE"));
 		this.add(historique.get(0));
 		this.setBackground(Color.LIGHT_GRAY);
-		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		this.setBorder(BorderFactory.createRaisedBevelBorder());
 		
 		//this.setPreferredSize(new Dimension(500, 100));
 		

@@ -2,9 +2,8 @@ package Modele;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
 import com.sun.tools.javac.util.ArrayUtils;
-
+import Modele.Joueur;
 
 
 public class Pioche {
@@ -24,15 +23,14 @@ public class Pioche {
 		
 	}
 	
-	public ArrayList<Character> piocher(ArrayList<Character> mainJoueur) {
+	public void piocher() {
 		
-		ArrayList<Character> main = mainJoueur;
 		
-		while (this.lettre.size() > 0 && main.size() < 7 ) {
-			main.add(this.lettre.remove(0));
+		
+		while (this.lettre.size() > 0 && Joueur.lettre.size() < 7 ) {
+			Joueur.lettre.add(this.lettre.remove(0));
 		}
 		
-		return main;
 		
 	}
 

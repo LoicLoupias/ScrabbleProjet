@@ -52,7 +52,7 @@ public class Modele {
 	    }
 	    
 
-		tour = 0;
+		this.tour = 0;
 
 			
 		}	

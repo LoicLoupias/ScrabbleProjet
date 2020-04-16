@@ -13,7 +13,7 @@ public class vueJeu extends JPanel {
 	Joueur[] joueur;
 	vuePoints points;
 	vueHistorique historique;
-	vueLettre main;
+	VueLettreBouton mainbouton;
 	
 	public vueJeu (Modele modele) {
 		
@@ -33,10 +33,10 @@ public class vueJeu extends JPanel {
 	    //historique.setSize(new Dimension(this.getWidth(), 500));
 	    this.add(historique, BorderLayout.CENTER);
 	    
-	    main = new vueLettre(modele);
+	    mainbouton = new VueLettreBouton(modele);
 	    //main.setSize(new Dimension(this.getWidth(), 50));
 	    //main.afficheMain(0);
-	    this.add(main, BorderLayout.SOUTH);
+	    this.add(mainbouton, BorderLayout.SOUTH);
 		
 	}
 	

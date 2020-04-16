@@ -1,5 +1,6 @@
 package Vue;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -26,9 +27,8 @@ public class vueLettre extends JPanel{
 		joueur = modele.joueurs;
 		FlowLayout layoutvueLettre = new FlowLayout();
 		this.setLayout(layoutvueLettre);
-		layoutvueLettre.setHgap(5);
+		layoutvueLettre.setHgap(10);
 		this.setBackground(new Color(0,200,0));
-		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		this.lettres = new JButton[7];
 		
 		for (int i = 0; i<7; i++) {

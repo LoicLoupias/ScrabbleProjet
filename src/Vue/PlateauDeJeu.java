@@ -60,11 +60,13 @@ public class PlateauDeJeu extends JPanel implements WindowListener {
 		for (int n=0; n<Vue.MT.length;n++) {
 			boutonTab[Vue.MT[n][0]][Vue.MT[n][1]].setBackground(Color.RED);
 			boutonTab[Vue.MT[n][0]][Vue.MT[n][1]].setText("MT");
+			boutonTab[Vue.MT[n][0]][Vue.MT[n][1]].setForeground(Color.WHITE);
 			
 		}
 		for (int n=0; n<Vue.LT.length;n++) {
 			boutonTab[Vue.LT[n][0]][Vue.LT[n][1]].setBackground(Color.BLUE);
 			boutonTab[Vue.LT[n][0]][Vue.LT[n][1]].setText("LT");
+			boutonTab[Vue.LT[n][0]][Vue.LT[n][1]].setForeground(Color.WHITE);
 		}
 		
 	}

@@ -72,10 +72,10 @@ public class Vue extends JFrame {
 	    this.pack();
 	    this.setVisible(true);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    vueDuJeu.main.afficheMain(0);
+	    vueDuJeu.mainbouton.main.afficheMain(0);
 	    JOptionPane.showMessageDialog(null, "Joueur suivant", "Scrabble", JOptionPane.NO_OPTION);
 	    vueDuJeu.historique.ajoutHistorique("test");
-	    vueDuJeu.main.afficheMain(1);
+	    vueDuJeu.mainbouton.main.afficheMain(1);
 	}
 	
 	public static void main(String [] args){

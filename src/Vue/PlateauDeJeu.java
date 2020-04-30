@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -18,6 +20,8 @@ import javax.swing.border.Border;
 public class PlateauDeJeu extends JPanel implements WindowListener {
     
 	JButton[][] boutonTab;
+	JButton caseajouer;
+	String lettreajouer2;
 	
 	@SuppressWarnings("deprecation")
 	public PlateauDeJeu() {
@@ -42,7 +46,7 @@ public class PlateauDeJeu extends JPanel implements WindowListener {
 				boutonTab[i][j].setPreferredSize(new Dimension(50,50));
 				boutonTab[i][j].setBackground(new Color(0,200,0));
 				boutonTab[i][j].setBorder(BorderFactory.createRaisedBevelBorder());
-				boutonTab[i][j].addActionListener(new BoutonListener());
+				boutonTab[i][j].addMouseListener(new BoutonListener());
 				this.add(boutonTab[i][j]);
 			}
 		}
@@ -69,10 +73,38 @@ public class PlateauDeJeu extends JPanel implements WindowListener {
 		
 	}
 	
-	class BoutonListener implements ActionListener {
-		
+	class BoutonListener implements MouseListener {
+
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void mouseClicked(MouseEvent e) {
+			//System.out.println(e.getSource());
+			JButton caseajouer = (JButton) e.getSource();
+			//System.out.println(vueLettre.getLettre());
+			//caseajouer.setText(vueLettre.lettreajouer);
+			
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub
 			
 		}

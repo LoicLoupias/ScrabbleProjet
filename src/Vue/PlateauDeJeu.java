@@ -3,6 +3,7 @@ package Vue;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -77,10 +78,19 @@ public class PlateauDeJeu extends JPanel implements WindowListener {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			//System.out.println(e.getSource());
-			JButton caseajouer = (JButton) e.getSource();
-			//System.out.println(vueLettre.getLettre());
-			//caseajouer.setText(vueLettre.lettreajouer);
+			System.out.println(e.getSource());
+			caseajouer = (JButton) e.getSource();
+			if (vueLettre.lettreajouer != null && caseajouer.isEnabled()) {
+				caseajouer.setText(vueLettre.lettreajouer);
+				caseajouer.setFont(new Font("Arial", Font.PLAIN, 40));
+				caseajouer.setBackground(Color.YELLOW);
+				caseajouer.setForeground(Color.BLACK);
+				vueLettre.lettreajouer = null;
+				vueLettre.boutonajouer.setEnabled(false);
+				caseajouer.removeMouseListener(this);
+				
+			}
+			
 			
 			
 		}

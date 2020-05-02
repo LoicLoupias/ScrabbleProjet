@@ -23,8 +23,8 @@ public class vueLettre extends JPanel{
 	
 	Joueur[] joueur;
 	JButton[] lettres;
-	JButton boutonajouer;
-	public String lettreajouer;
+	public static JButton boutonajouer;
+	public static String lettreajouer;
 	
 	public vueLettre(Modele modele) {
 	
@@ -79,10 +79,13 @@ public class vueLettre extends JPanel{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			JButton boutonajouer = (JButton) e.getSource();
+			boutonajouer = (JButton) e.getSource();
 			System.out.println(boutonajouer);
-			String lettreajouer = boutonajouer.getText();
-			System.out.println(lettreajouer);
+			if (boutonajouer.isEnabled()) {
+				lettreajouer = boutonajouer.getText();
+				System.out.println(lettreajouer);
+			}
+			
 			
 		}
 

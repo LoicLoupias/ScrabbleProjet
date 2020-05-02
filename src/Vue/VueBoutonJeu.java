@@ -36,6 +36,11 @@ public class VueBoutonJeu extends JPanel {
 		changer.setPreferredSize(new Dimension(200,35));
 		valider.setBorder(BorderFactory.createRaisedBevelBorder());
 		this.add(changer);
+		JButton annuler = new JButton("ANNULER");
+		changer.setBackground(new Color(245,245,220));
+		changer.setPreferredSize(new Dimension(200,35));
+		valider.setBorder(BorderFactory.createRaisedBevelBorder());
+		this.add(annuler);
 		
 	}
 

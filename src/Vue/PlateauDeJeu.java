@@ -30,12 +30,7 @@ public class PlateauDeJeu extends JPanel implements WindowListener {
 	public PlateauDeJeu() {
 		
 		this.setPreferredSize(new Dimension(50*15, 50*15));
-		/*
-		FlowLayout layout = new FlowLayout();
-		layout.setHgap(0);
-		layout.setVgap(0);
-		this.setLayout(layout);
-		*/
+		
 		GridLayout layoutPlateauDeJeu = new GridLayout(15,15);
 		this.setLayout(layoutPlateauDeJeu);
 		
@@ -84,19 +79,15 @@ public class PlateauDeJeu extends JPanel implements WindowListener {
 			caseajouer = (JButton) e.getSource();
 			if (vueLettre.lettreajouer != null && caseajouer.isEnabled()) {
 				caseajouer.setText(vueLettre.lettreajouer);
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
 				nouvMot.add(vueLettre.lettreajouer);
 				caseajouer.setFont(new Font("Arial", Font.PLAIN, 40));
 				caseajouer.setBackground(Color.YELLOW);
-=======
 				caseajouer.setFont(new Font("Arial", Font.PLAIN, 35));
 				caseajouer.setBackground(new Color(245,245,220));
->>>>>>> Stashed changes
-=======
+
 				caseajouer.setFont(new Font("Arial", Font.PLAIN, 35));
 				caseajouer.setBackground(new Color(245,245,220));
->>>>>>> Stashed changes
 				caseajouer.setForeground(Color.BLACK);
 				vueLettre.lettreajouer = null;
 				vueLettre.boutonajouer.setEnabled(false);

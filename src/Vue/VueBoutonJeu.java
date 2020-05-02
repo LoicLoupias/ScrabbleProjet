@@ -59,6 +59,7 @@ public class VueBoutonJeu extends JPanel {
 		this.add(annuler);
 
 	}
+	
 
 	class LettreListener implements MouseListener {
 

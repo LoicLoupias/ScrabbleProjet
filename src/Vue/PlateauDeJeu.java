@@ -24,7 +24,7 @@ public class PlateauDeJeu extends JPanel implements WindowListener {
 	JButton[][] boutonTab;
 	JButton caseajouer;
 	String lettreajouer2;
-	static ArrayList<String> nouvMot;
+	static ArrayList<String> nouvMot = new ArrayList<String>();
 	
 	@SuppressWarnings("deprecation")
 	public PlateauDeJeu() {

@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -23,6 +24,7 @@ public class PlateauDeJeu extends JPanel implements WindowListener {
 	JButton[][] boutonTab;
 	JButton caseajouer;
 	String lettreajouer2;
+	static ArrayList<String> nouvMot;
 	
 	@SuppressWarnings("deprecation")
 	public PlateauDeJeu() {
@@ -82,12 +84,16 @@ public class PlateauDeJeu extends JPanel implements WindowListener {
 			caseajouer = (JButton) e.getSource();
 			if (vueLettre.lettreajouer != null && caseajouer.isEnabled()) {
 				caseajouer.setText(vueLettre.lettreajouer);
+				nouvMot.add(vueLettre.lettreajouer);
 				caseajouer.setFont(new Font("Arial", Font.PLAIN, 40));
 				caseajouer.setBackground(Color.YELLOW);
 				caseajouer.setForeground(Color.BLACK);
 				vueLettre.lettreajouer = null;
 				vueLettre.boutonajouer.setEnabled(false);
 				caseajouer.removeMouseListener(this);
+				
+				
+				
 				
 			}
 			

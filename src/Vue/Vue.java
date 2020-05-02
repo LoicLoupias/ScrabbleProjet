@@ -23,6 +23,9 @@ public class Vue extends JFrame {
 	static int[][] LD = {{0,3}, {0,11}, {2,6}, {2,8}, {3,0}, {3,7}, {3,14}, {6,2}, {6,6}, {6,8}, {6,12}, {7,3}, {7,11}, {8,2}, {8,6}, {8,8}, {8,12}, {11,0}, {11,7}, {11,14}, {12,6}, {12,8}, {14,3}, {14,11}};
 	static int[][] MT = {{0,0}, {0,7}, {0,14}, {7,0}, {7,14}, {14,0}, {14,7}, {14,14}};
 	static int[][] LT = {{1,5}, {1,9}, {5,1}, {5,5}, {5,9}, {5,13}, {9,1}, {9,5}, {9,9}, {9,13}, {13,5}, {13,9}};
+	public Modele modele ;
+	public static vueJeu vueDuJeu ;
+	
 	
 	public Vue() {
 		super("Sccrable");
@@ -30,8 +33,8 @@ public class Vue extends JFrame {
 		this.setLayout(layout);
 		layout.setHgap(5);
 	    //this.setResizable(false);
-	    
-		
+		modele = new Modele();
+		vueDuJeu = new vueJeu(modele);
 		
 		
 		
@@ -45,9 +48,9 @@ public class Vue extends JFrame {
 		PlateauDeJeu plateau = new PlateauDeJeu();
 	    this.add(plateau, layout.WEST);
 	    
-	    Modele modele = new Modele();
 	    
-	    vueJeu vueDuJeu = new vueJeu(modele);
+	    
+	    
 	    this.add(vueDuJeu, layout.CENTER);
 	   
 	    Controleur control = new Controleur(modele, vueDuJeu, plateau);
@@ -74,7 +77,7 @@ public class Vue extends JFrame {
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    vueDuJeu.mainbouton.main.afficheMain(0);
 	    JOptionPane.showMessageDialog(null, "Joueur suivant", "Scrabble", JOptionPane.NO_OPTION);
-	    vueDuJeu.historique.ajoutHistorique("test");
+	    
 	    vueDuJeu.mainbouton.main.afficheMain(1);
 	}
 	

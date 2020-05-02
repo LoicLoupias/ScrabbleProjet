@@ -48,6 +48,7 @@ public class vueHistorique extends JPanel {
 		
 		this.historique.add(new JLabel(mot));
 		this.add(this.historique.get(this.historique.size() - 1));
+		this.updateUI();
 		
 		
 	}

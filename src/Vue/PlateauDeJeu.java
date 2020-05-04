@@ -18,9 +18,8 @@ public class PlateauDeJeu extends JPanel {
 	JButton[][] boutonTab;
 	JButton caseajouer;
 	String lettreajouer2;
-	static ArrayList<String> nouvMot = new ArrayList<String>();
+	ArrayList<Integer[]> coord ;
 	
-
 	public PlateauDeJeu() {
 		
 		this.setPreferredSize(new Dimension(50*15, 50*15));
@@ -29,6 +28,8 @@ public class PlateauDeJeu extends JPanel {
 		this.setLayout(layoutPlateauDeJeu);
 		
 		boutonTab = new JButton[Vue.SIZE][Vue.SIZE];
+		
+		coord = new ArrayList<Integer[]>();
 		
 		//Define new buttons
 		for (int i = 0; i<Vue.SIZE; i++) {
@@ -74,10 +75,30 @@ public class PlateauDeJeu extends JPanel {
 			
 			//on place le jeton ssi on a une lettre en main et que la case est disponible
 			if (vueLettre.lettreajouer != null && caseajouer.isEnabled()) {
-				caseajouer.setText(vueLettre.lettreajouer);
-
-				nouvMot.add(vueLettre.lettreajouer);//pour l'historique
 				
+Integer[] c = {e.getComponent().getX()/50, e.getComponent().getY()/50, (int) vueLettre.lettreajouer.toCharArray()[0] - 64};
+				
+				if (coord.size() == 1) {
+					if (coord.get(0)[0] != c[0] && coord.get(0)[1] != c[1]) {
+						System.out.println("Pas Bien!");
+						return;
+					}
+				}
+				else if (coord.size() > 1) {
+					if (coord.get(0)[0] == coord.get(1)[0] && coord.get(0)[0] != c[0]) {
+						System.out.println("Pas Bien!");
+						return;
+					}
+					else if (coord.get(0)[1] == coord.get(1)[1] && coord.get(0)[1] != c[1]) {
+						System.out.println("Pas Bien!");
+						return;						
+					}
+				}
+					
+				coord.add(c);
+				System.out.println(coord.get(0)[2]);
+				
+				caseajouer.setText(vueLettre.lettreajouer);		
 				caseajouer.setFont(new Font("Arial", Font.PLAIN, 40));
 				caseajouer.setBackground(Color.yellow);//mis en vu du jeton posé
 				

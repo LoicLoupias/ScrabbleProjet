@@ -64,10 +64,13 @@ public class VueBoutonJeu extends JPanel {
 			action = (JButton) e.getSource();
 			if (action == valider) {
 				mot = new String();
-
+				
+				/*
 				for (String ch : PlateauDeJeu.nouvMot) {
 					mot += ch;
 				}
+				*/
+				
 				Vue.vueDuJeu.historique.ajoutHistorique(mot);
 				Modele.tour = (Modele.tour + 1) % Modele.nbrJoueur;
 			}

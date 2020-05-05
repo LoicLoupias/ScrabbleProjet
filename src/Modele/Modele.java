@@ -7,19 +7,19 @@ import javax.swing.JOptionPane;
 import static java.util.Map.entry;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 
 public class Modele {
 	
 	public Joueur[] joueurs;
 	public Pioche pioche;
-	public Integer nbrJoueur;
-	public Integer tour;
-
-
+	public static Integer nbrJoueur;
+	public static Integer tour;
+	
 	
 	public static Map<Character, Integer[]> LETTRES = Map.ofEntries(
+			// initialisation des lettres de la picohe par { point, nombre de jeton dans la pioche}
 			entry('A', new Integer[] {1, 9}),	entry('B', new Integer[] {3, 2}), entry('C', new Integer[] {3, 2}),
 			entry('D', new Integer[] {2, 3}), entry('E', new Integer[] {1, 15}), entry('F', new Integer[] {4, 2}), entry('G', new Integer[] {2, 2}),
 			entry('H', new Integer[] {4, 2}), entry('I', new Integer[] {1, 8}),	entry('J', new Integer[] {8, 1}), entry('K', new Integer[] {10, 1}),
@@ -34,10 +34,12 @@ public class Modele {
 	public Etat etat;
 
 	public Modele() {
-		
+		//debut du jeu 
 		this.etat = Etat.EN_COURS;
 		this.pioche = new Pioche();
+		
 
+		// demande du nombre de joueur
 		nbrJoueur = (Integer) JOptionPane.showInputDialog(null, 
 	    	      "Veuillez selectionner le nombre de joueur :",
 	    	      "Scrabble",
@@ -45,7 +47,11 @@ public class Modele {
 	    	      null,
 	    	      new Integer[] {1,2,3,4}, 2);
 	    
+
+	
+		// nom des joueurs
 	    joueurs = new Joueur[nbrJoueur];
+	    
 	    for (int i = 1; i<=nbrJoueur; i++) {
 	        joueurs[i-1] = new Joueur(JOptionPane.showInputDialog(null, "Entrez le nom pour le joueur " + i + " :", "Scrabble", JOptionPane.QUESTION_MESSAGE ), new ArrayList<Character>());
 	        joueurs[i-1].piocher();
@@ -55,6 +61,11 @@ public class Modele {
 		this.tour = 0;
 
 			
-		}	
+		
+
+	
+		
+	}
+
 	
 }

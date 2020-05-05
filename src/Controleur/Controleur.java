@@ -6,8 +6,7 @@ import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Observable;
-import java.util.Observer;
+
 
 import Modele.Modele;
 import Vue.PlateauDeJeu;

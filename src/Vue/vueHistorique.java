@@ -1,26 +1,12 @@
 package Vue;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Label;
-import java.awt.List;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
-
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
+
 
 
 public class vueHistorique extends JPanel {
@@ -48,7 +34,7 @@ public class vueHistorique extends JPanel {
 		
 		this.historique.add(new JLabel(mot));
 		this.add(this.historique.get(this.historique.size() - 1));
-		this.updateUI();
+		this.updateUI();//actualise l'affichage de la frame
 		
 		
 	}

@@ -2,31 +2,25 @@ package Vue;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.ArrayList;
-
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
-public class PlateauDeJeu extends JPanel implements WindowListener {
+
+public class PlateauDeJeu extends JPanel {
     
 	JButton[][] boutonTab;
 	JButton caseajouer;
 	String lettreajouer2;
 	static ArrayList<String> nouvMot = new ArrayList<String>();
 	
-	@SuppressWarnings("deprecation")
+
 	public PlateauDeJeu() {
 		
 		this.setPreferredSize(new Dimension(50*15, 50*15));
@@ -77,28 +71,22 @@ public class PlateauDeJeu extends JPanel implements WindowListener {
 		public void mouseClicked(MouseEvent e) {
 			System.out.println(e.getSource());
 			caseajouer = (JButton) e.getSource();
+			
+			//on place le jeton ssi on a une lettre en main et que la case est disponible
 			if (vueLettre.lettreajouer != null && caseajouer.isEnabled()) {
 				caseajouer.setText(vueLettre.lettreajouer);
 
-				nouvMot.add(vueLettre.lettreajouer);
+				nouvMot.add(vueLettre.lettreajouer);//pour l'historique
+				
 				caseajouer.setFont(new Font("Arial", Font.PLAIN, 40));
-				caseajouer.setBackground(Color.YELLOW);
-				caseajouer.setFont(new Font("Arial", Font.PLAIN, 35));
-				caseajouer.setBackground(new Color(245,245,220));
+				caseajouer.setBackground(Color.yellow);//mis en vu du jeton posé
+				
 
-				caseajouer.setFont(new Font("Arial", Font.PLAIN, 35));
-				caseajouer.setBackground(new Color(245,245,220));
-				caseajouer.setForeground(Color.BLACK);
-				vueLettre.lettreajouer = null;
-				vueLettre.boutonajouer.setEnabled(false);
-				caseajouer.removeMouseListener(this);
-				
-				
-				
+				vueLettre.lettreajouer = null;//réinitialisation de lettreajouer pour les prochains jetons à placer
+				vueLettre.boutonajouer.setEnabled(false);//on rend le jeton jouer inaccessible une fois utilise
+				caseajouer.removeMouseListener(this);//rend la case inutilisable après avoir placé un jeton dessus
 				
 			}
-			
-			
 			
 		}
 
@@ -128,44 +116,5 @@ public class PlateauDeJeu extends JPanel implements WindowListener {
 		
 	}
 	
-	public void windowActivated(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public void windowClosed(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public void windowClosing(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public void windowDeactivated(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public void windowDeiconified(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public void windowIconified(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public void windowOpened(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }		

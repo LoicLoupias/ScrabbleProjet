@@ -3,23 +3,17 @@ package Vue;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
-
-
 import Modele.Modele;
 
-
 public class VueBoutonJeu extends JPanel {
-	public JButton action,valider,passer,changer,annuler;
+	public JButton action, valider, passer, changer, annuler;
 
-	String mot ;
+	String mot;
 
 	public VueBoutonJeu(Modele modele) {
 
@@ -30,6 +24,7 @@ public class VueBoutonJeu extends JPanel {
 		layoutvueBoutonJeu.setVgap(15);
 		this.setBackground(new Color(0, 200, 0));
 
+		//initialisation des bouttons de jeu 
 		valider = new JButton("VALIDER");
 		valider.setBackground(new Color(245, 245, 220));
 		valider.setPreferredSize(new Dimension(200, 35));
@@ -59,24 +54,28 @@ public class VueBoutonJeu extends JPanel {
 		this.add(annuler);
 
 	}
-	
 
 	class LettreListener implements MouseListener {
 
-		
 		@Override
 		public void mouseClicked(MouseEvent e) {
+
+			// boutton activer affiche le mot dans l'historique (pour le moment)
 			action = (JButton) e.getSource();
 			if (action == valider) {
 				mot = new String();
 
-				
 				for (String ch : PlateauDeJeu.nouvMot) {
-					mot+=ch;
+					mot += ch;
 				}
 				Vue.vueDuJeu.historique.ajoutHistorique(mot);
-				
-				System.out.println(mot);
+				Modele.tour = (Modele.tour + 1) % Modele.nbrJoueur;
+			}
+
+			else if (action == passer) {
+
+				Modele.tour = (Modele.tour + 1) % Modele.nbrJoueur;
+				System.out.println(Modele.tour);
 			}
 
 		}
@@ -106,9 +105,5 @@ public class VueBoutonJeu extends JPanel {
 		}
 
 	}
-
-	
-
-	
 
 }

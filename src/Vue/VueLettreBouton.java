@@ -1,11 +1,8 @@
 package Vue;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-
 import Modele.Joueur;
 import Modele.Modele;
 

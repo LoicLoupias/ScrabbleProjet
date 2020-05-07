@@ -102,7 +102,8 @@ public class PlateauDeJeu extends JPanel {
 							coord.set(1, c[1]);
 						}
 					} 
-				}				
+				}	
+				
 				motjoue += vueLettre.lettreajouer;
 				caseajouer.setText(vueLettre.lettreajouer);		
 				caseajouer.setFont(new Font("Arial", Font.PLAIN, 40));

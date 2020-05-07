@@ -43,9 +43,9 @@ public class Modele {
 
 	public Modele() {
 		DICTIONNAIRE = new HashMap<>();
-		int t = Integer.parseInt(new SimpleDateFormat("SSS").format(new Date()));
+		float t = Float.parseFloat(new SimpleDateFormat("ss.SSS").format(new Date()));
 		try { 
-			File file = new File("Modele\\dico_a-g.txt"); 
+			File file = new File("src\\Modele\\dico_a-g.txt"); 
 		    BufferedReader br = new BufferedReader(new FileReader(file)); 
 		    String st; 
 		    
@@ -53,7 +53,7 @@ public class Modele {
 		    	DICTIONNAIRE.put(st, 0); 
 		    }
 		    
-		    file = new File("Modele\\dico_h-z.txt"); 
+		    file = new File("src\\Modele\\dico_h-z.txt"); 
 		    br = new BufferedReader(new FileReader(file)); 
 
 		    while ((st = br.readLine()) != null) {
@@ -64,7 +64,7 @@ public class Modele {
 			e.printStackTrace();
 		}
 		
-		System.out.println(Integer.parseInt(new SimpleDateFormat("SSS").format(new Date())) - t + "ms pour créer le dictionnaire");
+		System.out.println(Float.parseFloat(new SimpleDateFormat("ss.SSS").format(new Date())) - t + "s pour créer le dictionnaire");
 		System.out.println(DICTIONNAIRE.size());
 		
 		//debut du jeu 

@@ -6,7 +6,15 @@ import javax.swing.JOptionPane;
 
 import static java.util.Map.entry;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
 
 
@@ -16,7 +24,7 @@ public class Modele {
 	public Pioche pioche;
 	public static Integer nbrJoueur;
 	public static Integer tour;
-	
+	public static HashMap<String, Integer> DICTIONNAIRE;
 	
 	public static Map<Character, Integer[]> LETTRES = Map.ofEntries(
 			// initialisation des lettres de la picohe par { point, nombre de jeton dans la pioche}
@@ -34,7 +42,33 @@ public class Modele {
 	public Etat etat;
 
 	public Modele() {
+		DICTIONNAIRE = new HashMap<>();
+		int t = Integer.parseInt(new SimpleDateFormat("SSS").format(new Date()));
+		try { 
+			File file = new File("Modele\\dico_a-g.txt"); 
+		    BufferedReader br = new BufferedReader(new FileReader(file)); 
+		    String st; 
+		    
+		    while ((st = br.readLine()) != null) {
+		    	DICTIONNAIRE.put(st, 0); 
+		    }
+		    
+		    file = new File("Modele\\dico_h-z.txt"); 
+		    br = new BufferedReader(new FileReader(file)); 
+
+		    while ((st = br.readLine()) != null) {
+		    	DICTIONNAIRE.put(st, 1); 
+		    }
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(Integer.parseInt(new SimpleDateFormat("SSS").format(new Date())) - t + "ms pour créer le dictionnaire");
+		System.out.println(DICTIONNAIRE.size());
+		
 		//debut du jeu 
+		
 		this.etat = Etat.EN_COURS;
 		this.pioche = new Pioche();
 		

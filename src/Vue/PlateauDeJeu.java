@@ -15,10 +15,10 @@ import javax.swing.JPanel;
 
 public class PlateauDeJeu extends JPanel {
     
-	JButton[][] boutonTab;
+	public static JButton[][] boutonTab;
 	JButton caseajouer;
-	String lettreajouer2;
-	ArrayList<Integer[]> coord ;
+	public static String motjoue;
+	ArrayList<Integer> coord ;
 	
 	public PlateauDeJeu() {
 		
@@ -29,7 +29,8 @@ public class PlateauDeJeu extends JPanel {
 		
 		boutonTab = new JButton[Vue.SIZE][Vue.SIZE];
 		
-		coord = new ArrayList<Integer[]>();
+		coord = new ArrayList<Integer>();
+		motjoue = new String();
 		
 		//Define new buttons
 		for (int i = 0; i<Vue.SIZE; i++) {
@@ -76,36 +77,42 @@ public class PlateauDeJeu extends JPanel {
 			//on place le jeton ssi on a une lettre en main et que la case est disponible
 			if (vueLettre.lettreajouer != null && caseajouer.isEnabled()) {
 				
-Integer[] c = {e.getComponent().getX()/50, e.getComponent().getY()/50, (int) vueLettre.lettreajouer.toCharArray()[0] - 64};
+				Integer[] c = {e.getComponent().getX()/50, e.getComponent().getY()/50, (int) vueLettre.lettreajouer.toCharArray()[0] - 64};
 				
-				if (coord.size() == 1) {
-					if (coord.get(0)[0] != c[0] && coord.get(0)[1] != c[1]) {
+				if (coord.size() == 0) {
+					coord.add(c[0]);
+					coord.add(c[1]);
+				}
+				else if (coord.size() == 2) {
+					if (coord.get(0) != c[0] && coord.get(1) != c[1]) {
 						System.out.println("Pas Bien!");
 						return;
 					}
+					else if (coord.get(0) == c[0]) {coord.add(0);}
+					else {coord.add(1);}
 				}
-				else if (coord.size() > 1) {
-					if (coord.get(0)[0] == coord.get(1)[0] && coord.get(0)[0] != c[0]) {
+				else if (coord.size() == 3) {
+					if (coord.get(coord.get(2)) != c[coord.get(2)]) {
 						System.out.println("Pas Bien!");
 						return;
 					}
-					else if (coord.get(0)[1] == coord.get(1)[1] && coord.get(0)[1] != c[1]) {
-						System.out.println("Pas Bien!");
-						return;						
-					}
-				}
-					
-				coord.add(c);
-				System.out.println(coord.get(0)[2]);
-				
+					else {
+						if (coord.get(1-coord.get(2)) > c[1-coord.get(2)]) {
+							coord.set(0, c[0]);
+							coord.set(1, c[1]);
+						}
+					} 
+				}				
+				motjoue += vueLettre.lettreajouer;
 				caseajouer.setText(vueLettre.lettreajouer);		
 				caseajouer.setFont(new Font("Arial", Font.PLAIN, 40));
 				caseajouer.setBackground(Color.yellow);//mis en vu du jeton posé
-				
 
 				vueLettre.lettreajouer = null;//réinitialisation de lettreajouer pour les prochains jetons à placer
 				vueLettre.boutonajouer.setEnabled(false);//on rend le jeton jouer inaccessible une fois utilise
 				caseajouer.removeMouseListener(this);//rend la case inutilisable après avoir placé un jeton dessus
+				
+				System.out.println(Controleur.Controleur.verification(coord, true));
 				
 			}
 			

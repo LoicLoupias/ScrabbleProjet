@@ -6,10 +6,15 @@ import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+import com.sun.tools.javac.code.Attribute.Array;
 
 import Modele.Modele;
 import Vue.PlateauDeJeu;
+import Vue.Vue;
 import Vue.vueJeu;
 
 @SuppressWarnings("deprecation")
@@ -33,6 +38,76 @@ public class Controleur implements ContainerListener, ActionListener, ItemListen
 		
 	}
 	
+	public static boolean verification(ArrayList<Integer> coord, boolean deepsearch) {
+		
+		Integer[] c = {coord.get(0), coord.get(1)};
+
+		if (coord.size() == 2) {return Modele.DICTIONNAIRE.containsKey(PlateauDeJeu.boutonTab[c[0]][c[1]].getText().toLowerCase());}
+
+		Integer axefixe = coord.get(2);
+		
+		String mot = new String();
+		
+		boolean correct = true;
+		
+		while (c[1-axefixe] > 0 && PlateauDeJeu.boutonTab[c[0]][c[1]].getText().length() == 1) {c[1-axefixe] -= 1;System.out.println("test");} // Obtention de la position de départ
+		
+	
+		if (!deepsearch) { // On ne parcourt pas tous les mots accolés si ce n'est pas le mot initial
+			while (c[1-axefixe] < 15 && PlateauDeJeu.boutonTab[c[0]][c[1]].getText().length() == 1) {
+				mot += PlateauDeJeu.boutonTab[c[0]][c[1]].getText();
+				c[1-axefixe] += 1;
+			}
+			System.out.println("test1"+mot);
+			return Modele.DICTIONNAIRE.containsKey(mot);
+		}
+		
+		else { // Cas du mot initial
+			
+			ArrayList<Character> motAverif = new ArrayList<Character>();
+			for (char x: PlateauDeJeu.motjoue.toCharArray()) {motAverif.add(x);}
+
+			while (c[1-axefixe] < 15 && PlateauDeJeu.boutonTab[c[0]][c[1]].getText().length() == 1 && correct) { // Tant que lettre posé
+				
+				if (!motAverif.isEmpty()) {motAverif.remove(PlateauDeJeu.boutonTab[c[0]][c[1]].getText());
+				mot += PlateauDeJeu.boutonTab[c[0]][c[1]].getText();
+				
+				// *** Verfication des mots à côtés ***
+				
+				if (axefixe == 0) {
+					if (PlateauDeJeu.boutonTab[c[0]-1][c[1]].getText().length() == 1) {
+						ArrayList<Integer> nouvCoord = new ArrayList<Integer>(Arrays.asList(c[0]-1,c[1],1)); 
+						correct = Controleur.verification(nouvCoord, false);
+					}
+					else if (PlateauDeJeu.boutonTab[c[0]+1][c[1]].getText().length() == 1) {
+						ArrayList<Integer> nouvCoord = new ArrayList<Integer>(Arrays.asList(c[0]+1,c[1],1)); 
+						correct = Controleur.verification(nouvCoord, false);
+					}
+				}
+				else {
+					if (PlateauDeJeu.boutonTab[c[0]][c[1]-1].getText().length() == 1) {
+						ArrayList<Integer> nouvCoord = new ArrayList<Integer>(Arrays.asList(c[0],c[1]-1,0)); 
+						correct = Controleur.verification(nouvCoord, false);
+					}
+					else if (PlateauDeJeu.boutonTab[c[0]][c[1]+1].getText().length() == 1) {
+						ArrayList<Integer> nouvCoord = new ArrayList<Integer>(Arrays.asList(c[0],c[1]+1,0)); 
+						correct = Controleur.verification(nouvCoord, false);
+					}
+				}
+				
+				// *** Fin de verfication des mots à coté
+				
+				c[1-axefixe] += 1;
+			}
+			
+			if (!Modele.DICTIONNAIRE.containsKey(mot.toLowerCase()) || !motAverif.isEmpty()) {correct = false;}
+			
+			}
+		}
+		System.out.println("test2"+mot);
+		return correct;
+		
+	}
 
 	@Override
 	public void itemStateChanged(ItemEvent e) {

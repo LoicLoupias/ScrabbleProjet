@@ -20,7 +20,7 @@ import java.util.HashMap;
 
 public class Modele {
 	
-	public Joueur[] joueurs;
+	public static Joueur[] joueurs;
 	public Pioche pioche;
 	public static Integer nbrJoueur;
 	public static Integer tour;

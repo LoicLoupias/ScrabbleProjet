@@ -22,7 +22,6 @@ public class VueBoutonJeu extends JPanel {
 	ArrayList<Integer> indicelettrechange;
 	public JButton action, valider, passer, changer, annuler;
 	String mot;
-
 	public VueBoutonJeu(Modele modele) {
 
 		super();
@@ -32,7 +31,7 @@ public class VueBoutonJeu extends JPanel {
 		layoutvueBoutonJeu.setVgap(15);
 		this.setBackground(new Color(0, 200, 0));
 
-		// initialisation des bouttons de jeu
+		// initialisation des boutons de jeu
 		valider = new JButton("VALIDER");
 		valider.setBackground(new Color(245, 245, 220));
 		valider.setPreferredSize(new Dimension(200, 35));
@@ -140,7 +139,6 @@ public class VueBoutonJeu extends JPanel {
 						for (int i = 0; i < nblettrechange; i++) {
 							for (int j = 0; j < nblettrechange; j++) {
 								if (indicelettrechange.get(i) == indicelettrechange.get(j) && i != j) {
-									System.out.println("toto" + i + j);
 									indiceachanger = j;
 								}
 							}
@@ -161,10 +159,17 @@ public class VueBoutonJeu extends JPanel {
 						} else {//Sinon, la saisie est correcte, les lettres sont changées
 							JOptionPane.showMessageDialog(null, "Changement des lettres", "Scrabble",
 									JOptionPane.INFORMATION_MESSAGE);
+							for(int i=0;i<indicelettrechange.size();i++) {
+								//Modele.joueurs.
+							}
+							
+							
+							
+							
 							//ATTENTION
 							// A FAIRE
 							//ENGENDRER LE CHANGEMENT DES LETTRES
-							//ATTETION
+							//ATTENTION
 						}
 					}
 				}

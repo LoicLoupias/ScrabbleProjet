@@ -7,7 +7,7 @@ import java.util.Collections;
 
 public class Pioche {
 	
-	static ArrayList<Character> lettrePioche;
+	public static ArrayList<Character> lettrePioche;
 	
 	public Pioche() {
 		

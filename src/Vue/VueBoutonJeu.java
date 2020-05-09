@@ -13,8 +13,8 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import Modele.Joueur;
-import Modele.Modele;
+
+import Modele.*;
 
 public class VueBoutonJeu extends JPanel {
 	int nblettrechange;
@@ -160,16 +160,22 @@ public class VueBoutonJeu extends JPanel {
 							JOptionPane.showMessageDialog(null, "Changement des lettres", "Scrabble",
 									JOptionPane.INFORMATION_MESSAGE);
 							for(int i=0;i<indicelettrechange.size();i++) {
-								//Modele.joueurs.
+								char temporaire = Modele.joueurs[Modele.tour].lettre.get(indicelettrechange.get(i)-1);
+								//System.out.println(Modele.joueurs[Modele.tour].lettre);
+								//System.out.println("Lettre a changer :" +temporaire);
+								//System.out.println("Etat de la pioche :" +Pioche.lettrePioche);
+								Modele.joueurs[Modele.tour].lettre.set((indicelettrechange.get(i)-1), Pioche.lettrePioche.remove(0));
+								//System.out.println(Modele.joueurs[i].lettre);
+								//System.out.println("Etat de la pioche :" +Pioche.lettrePioche);
+								Pioche.lettrePioche.add(temporaire);
+								//System.out.println("Etat de la pioche :" +Pioche.lettrePioche);
+								Collections.shuffle(Pioche.lettrePioche);
+								//System.out.println("Etat de la pioche :" +Pioche.lettrePioche);
+								
+								
+								//ATTENTION
+								//MANQUE A ACTUALISER LA FENETRE
 							}
-							
-							
-							
-							
-							//ATTENTION
-							// A FAIRE
-							//ENGENDRER LE CHANGEMENT DES LETTRES
-							//ATTENTION
 						}
 					}
 				}

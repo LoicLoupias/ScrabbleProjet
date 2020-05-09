@@ -8,6 +8,8 @@ import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -17,8 +19,9 @@ public class PlateauDeJeu extends JPanel {
     
 	public static JButton[][] boutonTab;
 	JButton caseajouer;
-	public static String motjoue;
-	ArrayList<Integer> coord ;
+	public static ArrayList<String> motjoue;
+	public static Integer[] coord ;
+	public static ArrayList<Integer[]> coordPourAnnuler;
 	
 	public PlateauDeJeu() {
 		
@@ -29,8 +32,9 @@ public class PlateauDeJeu extends JPanel {
 		
 		boutonTab = new JButton[Vue.SIZE][Vue.SIZE];
 		
-		coord = new ArrayList<Integer>();
-		motjoue = new String();
+		coord = new Integer[]{-1, -1, -1};
+		coordPourAnnuler = new ArrayList<Integer[]>();
+		motjoue = new ArrayList<String>();
 		
 		//Define new buttons
 		for (int i = 0; i<Vue.SIZE; i++) {
@@ -78,33 +82,31 @@ public class PlateauDeJeu extends JPanel {
 			if (vueLettre.lettreajouer != null && caseajouer.isEnabled()) {
 				
 				Integer[] c = {e.getComponent().getX()/50, e.getComponent().getY()/50, (int) vueLettre.lettreajouer.toCharArray()[0] - 64};
-				
-				if (coord.size() == 0) {
-					coord.add(c[0]);
-					coord.add(c[1]);
+				if (coord[0] == -1) {
+					coord[0] = c[0];
+					coord[1] = c[1];
 				}
-				else if (coord.size() == 2) {
-					if (coord.get(0) != c[0] && coord.get(1) != c[1]) {
-						System.out.println("Pas Bien!");
+				else if (coord[2] == -1) {
+					if (coord[0] != c[0] && coord[1] != c[1]) {
+						System.out.println("Pas Bien! 1");
 						return;
 					}
-					else if (coord.get(0) == c[0]) {coord.add(0);}
-					else {coord.add(1);}
+					else if (coord[0] == c[0]) {coord[2] = 0;}
+					else {coord[2] = 1;}
 				}
-				else if (coord.size() == 3) {
-					if (coord.get(coord.get(2)) != c[coord.get(2)]) {
+				else if (coord[coord[2]] != c[coord[2]]) {
 						System.out.println("Pas Bien!");
 						return;
-					}
-					else {
-						if (coord.get(1-coord.get(2)) > c[1-coord.get(2)]) {
-							coord.set(0, c[0]);
-							coord.set(1, c[1]);
-						}
-					} 
-				}	
+				}
 				
-				motjoue += vueLettre.lettreajouer;
+				if (coord[1-coord[2]] > c[1-coord[2]]) {
+					coord[0] = c[0];
+					coord[1] = c[1];
+				}
+				
+				motjoue.add(vueLettre.lettreajouer.toLowerCase());
+				coordPourAnnuler.add(c);
+				
 				caseajouer.setText(vueLettre.lettreajouer);		
 				caseajouer.setFont(new Font("Arial", Font.PLAIN, 40));
 				caseajouer.setBackground(Color.yellow);//mis en vu du jeton posé
@@ -112,9 +114,9 @@ public class PlateauDeJeu extends JPanel {
 				vueLettre.lettreajouer = null;//réinitialisation de lettreajouer pour les prochains jetons à placer
 				vueLettre.boutonajouer.setEnabled(false);//on rend le jeton jouer inaccessible une fois utilise
 				caseajouer.removeMouseListener(this);//rend la case inutilisable après avoir placé un jeton dessus
-				
+
 				System.out.println(Controleur.Controleur.verification(coord, true));
-				
+				System.out.println(Controleur.Controleur.compterPoint(coord));
 			}
 			
 		}

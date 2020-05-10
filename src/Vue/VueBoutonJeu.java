@@ -183,6 +183,7 @@ public class VueBoutonJeu extends JPanel {
 								
 								//ATTENTION
 								//MANQUE A ACTUALISER LA FENETRE
+								
 							}
 							Vue.vueDuJeu.historique.ajoutHistorique("Le joueur "+Modele.tour+" a décidé de changer ses lettres !");
 							Modele.tour = (Modele.tour + 1) % Modele.nbrJoueur;

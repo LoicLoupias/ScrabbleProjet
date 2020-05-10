@@ -17,8 +17,8 @@ import Modele.Modele;
 
 public class vueLettre extends JPanel {
 
-	Joueur[] joueur;
-	JButton[] lettres;
+	static Joueur[] joueur;
+	static JButton[] lettres;
 	public static JButton boutonajouer;
 	public static String lettreajouer;
 
@@ -33,7 +33,7 @@ public class vueLettre extends JPanel {
 		layoutvueLettre.setVgap(15);
 
 		this.setBackground(new Color(0, 200, 0));
-		TitledBorder bordure = new TitledBorder("VOS LETTRES :");
+		TitledBorder bordure = new TitledBorder("joueur "+Modele.tour+ "VOS LETTRES :   "+ modele.joueurs[modele.tour].lettre);
 		Font fonttitre = new Font("Arial", Font.BOLD, 15);
 		bordure.setTitleFont(fonttitre);
 		this.setBorder(bordure);
@@ -53,15 +53,19 @@ public class vueLettre extends JPanel {
 		}
 	}
 
-
-	public void afficheMain(int numeroJ) {
+	public  void afficheMain(int numeroJ) {
 
 		for (int i = 0; i < this.joueur[numeroJ].lettre.size(); i++) {
-			this.lettres[i].setText(Character.toString(this.joueur[numeroJ].lettre.get(i)));
+			this.lettres[i].setText(Character.toString(joueur[numeroJ].lettre.get(i)));
 			this.lettres[i].setVisible(true);
 		}
+		
+		vueJeu.mainbouton.updateUI();
+		
 
 	}
+	
+	
 
 	public String getLettre() {
 		return lettreajouer;
@@ -71,8 +75,8 @@ public class vueLettre extends JPanel {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			
-			//on peut utiliser la lettre de la main ssi elle est activé
+
+			// on peut utiliser la lettre de la main ssi elle est activé
 			boutonajouer = (JButton) e.getSource();
 			if (boutonajouer.isEnabled()) {
 				lettreajouer = boutonajouer.getText();

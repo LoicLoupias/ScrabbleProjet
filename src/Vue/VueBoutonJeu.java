@@ -13,7 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-
+import Controleur.Controleur;
 import Modele.*;
 
 public class VueBoutonJeu extends JPanel {
@@ -77,17 +77,16 @@ public class VueBoutonJeu extends JPanel {
 				 */
 
 				Vue.vueDuJeu.historique.ajoutHistorique("Joueur "+Modele.tour+" a joué le mot : "+mot+" ! Ce mot lui rapporte "+ /*indiquer nb points*/ " points !");
-				Modele.tour = (Modele.tour + 1) % Modele.nbrJoueur;
+				Controleur.passer();
 				Vue.vueDuJeu.historique.ajoutHistorique("C'est à joueur "+Modele.tour+" de jouer !");
 			}
 
 			else if (action == passer) {
 				
 				Vue.vueDuJeu.historique.ajoutHistorique("Le joueur "+Modele.tour+" décide de passer son tour !");
-				Modele.tour = (Modele.tour + 1) % Modele.nbrJoueur;
-				Vue.vueDuJeu.mainbouton.main.afficheMain(Modele.tour);
+				Controleur.passer();
 				Vue.vueDuJeu.historique.ajoutHistorique("C'est à joueur "+Modele.tour+" de jouer !");
-				System.out.println(Modele.tour);
+				//System.out.println(Modele.tour);
 				// Modele.tour suit le numéro de joueur comme il faut mais manque à afficher la
 				// main du joueur correspondant
 			}
@@ -167,6 +166,7 @@ public class VueBoutonJeu extends JPanel {
 						} else {//Sinon, la saisie est correcte, les lettres sont changées
 							JOptionPane.showMessageDialog(null, "Changement des lettres", "Scrabble",
 									JOptionPane.INFORMATION_MESSAGE);
+							
 							for(int i=0;i<indicelettrechange.size();i++) {
 								char temporaire = Modele.joueurs[Modele.tour].lettre.get(indicelettrechange.get(i)-1);
 								//System.out.println(Modele.joueurs[Modele.tour].lettre);
@@ -184,13 +184,22 @@ public class VueBoutonJeu extends JPanel {
 								//ATTENTION
 								//MANQUE A ACTUALISER LA FENETRE
 								
+								
+								
+								
 							}
+							
 							Vue.vueDuJeu.historique.ajoutHistorique("Le joueur "+Modele.tour+" a décidé de changer ses lettres !");
-							Modele.tour = (Modele.tour + 1) % Modele.nbrJoueur;
+							Controleur.passer();
 							Vue.vueDuJeu.historique.ajoutHistorique("C'est à joueur "+Modele.tour+" de jouer !");
 						}
 					}
 				}
+				
+				
+				
+				
+				
 			}
 
 			else if (action == annuler) {
@@ -222,6 +231,7 @@ public class VueBoutonJeu extends JPanel {
 
 		}
 
+		
 	}
 
 }

@@ -10,7 +10,7 @@ public class vueJeu extends JPanel {
 	Joueur[] joueur;
 	vuePoints points;
 	vueHistorique historique;
-	VueLettreBouton mainbouton;
+	public static VueLettreBouton mainbouton;
 	
 	public vueJeu (Modele modele) {
 		

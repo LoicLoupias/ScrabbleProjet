@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import Controleur.Controleur;
+import Modele.Joueur;
 import Modele.Modele;
 
 
@@ -71,10 +72,17 @@ public class Vue extends JFrame {
 	    this.pack();
 	    this.setVisible(true);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    vueDuJeu.mainbouton.main.afficheMain(0);
-	    JOptionPane.showMessageDialog(null, "Joueur suivant", "Scrabble", JOptionPane.NO_OPTION);
 	    
-	    vueDuJeu.mainbouton.main.afficheMain(1);
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    JOptionPane.showMessageDialog(null, "que le dudududu duel !!!", "Scrabble", JOptionPane.NO_OPTION);
+	    
+	    vueDuJeu.mainbouton.main.afficheMain(modele.tour);
 	}
 	
 	public static void main(String [] args){

@@ -4,6 +4,8 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
+import Vue.VueBoutonJeu;
+
 import static java.util.Map.entry;
 
 import java.io.BufferedReader;
@@ -89,8 +91,13 @@ public class Modele {
 	    for (int i = 1; i<=nbrJoueur; i++) {
 	        joueurs[i-1] = new Joueur(JOptionPane.showInputDialog(null, "Entrez le nom pour le joueur " + i + " :", "Scrabble", JOptionPane.QUESTION_MESSAGE ), new ArrayList<Character>());
 	        joueurs[i-1].piocher();
+	        System.out.println(joueurs[i-1].lettre);
+	        System.out.println(joueurs[0].lettre);
+	        
 	    }
 	    
+	    System.out.println(Modele.joueurs[0].lettre);
+	    System.out.println(Modele.joueurs[1].lettre);
 
 		this.tour = 0;
 

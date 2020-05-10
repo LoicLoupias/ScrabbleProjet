@@ -9,7 +9,7 @@ import Modele.Modele;
 public class VueLettreBouton extends JPanel {
 	
 	Joueur[] joueur;
-	vueLettre main;
+	public vueLettre main;
 	VueBoutonJeu bouton; 
 	
 	public VueLettreBouton (Modele modele) {

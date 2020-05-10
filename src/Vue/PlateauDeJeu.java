@@ -81,7 +81,7 @@ public class PlateauDeJeu extends JPanel {
 			//on place le jeton ssi on a une lettre en main et que la case est disponible
 			if (vueLettre.lettreajouer != null && caseajouer.isEnabled()) {
 				
-				Integer[] c = {e.getComponent().getX()/50, e.getComponent().getY()/50, (int) vueLettre.lettreajouer.toCharArray()[0] - 64};
+				Integer[] c = {e.getComponent().getY()/50, e.getComponent().getX()/50, (int) vueLettre.lettreajouer.toCharArray()[0] - 64};
 				if (coord[0] == -1) {
 					coord[0] = c[0];
 					coord[1] = c[1];
@@ -116,7 +116,7 @@ public class PlateauDeJeu extends JPanel {
 				caseajouer.removeMouseListener(this);//rend la case inutilisable après avoir placé un jeton dessus
 
 				System.out.println(Controleur.Controleur.verification(coord, true));
-				System.out.println(Controleur.Controleur.compterPoint(coord));
+				System.out.println(Controleur.Controleur.compterPoint(coord, true));
 			}
 			
 		}

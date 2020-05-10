@@ -8,6 +8,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -39,90 +40,113 @@ public class Controleur implements ContainerListener, ActionListener, ItemListen
 	
 	public static boolean verification(Integer[] coord, boolean deepsearch) {
 		
-		Integer[] coordVerif = coord.clone(); 
+		Integer[] coordVerif = coord.clone();; 
 		ArrayList<String> motjoueVerif = new ArrayList<String>();
 		motjoueVerif = (ArrayList<String>) PlateauDeJeu.motjoue.clone();
 		
+		String mot = new String();
+		boolean correct = Controleur.estDansLeTab(PlateauDeJeu.coordPourAnnuler, new Integer[] {7, 7});
+
+		System.out.println(correct);
+		
+		boolean extremiteMot = false;
+		
 		if (coordVerif[2] == -1) {coordVerif[2] = 0;}
 		
-		String mot = new String();
-		
-		boolean correct = true;
-		
 		if (coordVerif[2] == 0) {
-			try {
-				while (coordVerif[1] > 0 && PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]-1].getText().length() == 1) {coordVerif[1] -= 1;} // Obtention de la position de départ
-			} catch (Exception e) {System.out.println("Position de départ WEST");}
+			while (coordVerif[1]-1 >= 0 && !extremiteMot) {
+				if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]-1].getText().length() == 1) {coordVerif[1] -= 1;} // Obtention de la position de départ
+				else {extremiteMot = true;}
+			}
+			extremiteMot = false;
+			
 		}
 		else {
-			try {
-				while (coordVerif[0] > 0 && PlateauDeJeu.boutonTab[coordVerif[0]-1][coordVerif[1]].getText().length() == 1) {coordVerif[0] -= 1;} // Obtention de la position de départ
-			} catch (Exception e) {System.out.println("Position de départ EAST");};
+			while (coordVerif[0]-1 >= 0 && !extremiteMot) {
+				if (PlateauDeJeu.boutonTab[coordVerif[0]-1][coordVerif[1]].getText().length() == 1 && !extremiteMot) {coordVerif[0] -= 1;} // Obtention de la position de départ
+				else {extremiteMot = true;}
+			}
+			extremiteMot = false;
 		}
-	
+		
+		
 		if (!deepsearch) { // On ne parcourt pas tous les mots accolés si ce n'est pas le mot initial
 			if (coordVerif[2] == 0) {
-				while (coordVerif[1] < 15 && PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().length() == 1) {
-					
-					mot += PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().toLowerCase();
-					coordVerif[1] += 1;
+				while (coordVerif[1] <= 14 && !extremiteMot) {
+					if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().length() == 1) {
+						mot += PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().toLowerCase();
+						coordVerif[1] += 1;
+					}
+					else {extremiteMot = true;}
 				}
+				extremiteMot = false;
 			}
 			else {
-				while (coordVerif[0] < 15 && PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().length() == 1) {
-					coordVerif[0] += 1;
-					mot += PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().toLowerCase();
+				while (coordVerif[0] <= 14  && !extremiteMot) {
+					if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().length() == 1) {
+						coordVerif[0] += 1;
+						mot += PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().toLowerCase();
+					}
+					else {extremiteMot = true;}
 				}
+				extremiteMot = false;
 			}
 			System.out.println("deepseach");
 			return Modele.DICTIONNAIRE.containsKey(mot);
 		}
 		
-		else if (coordVerif[2] == 1) { // Cas du mot initial
+		else if (coordVerif[2] == 0) { // Cas du mot initial
 			
 			
-			while (coordVerif[1] < 15 && PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().length() == 1 && correct) { // Tant que lettre posé
+			while (coordVerif[1] <= 14 && !extremiteMot) {
 				
-				if (!motjoueVerif.isEmpty()) {motjoueVerif.remove(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().toLowerCase());}
-				mot += PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().toLowerCase();
-				
-				// *** Verfication des mots à côtés ***
-				try {
-					if (PlateauDeJeu.boutonTab[coordVerif[0]-1][coordVerif[1]].getText().length() == 1) {
-						System.out.println("1");
-						correct = Controleur.verification(new Integer[]{coordVerif[0]-1, coordVerif[1], 1}, false);
+				if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().length() == 1) { // Tant que lettre posé
+					
+					if (!motjoueVerif.isEmpty()) {motjoueVerif.remove(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().toLowerCase());}
+					mot += PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().toLowerCase();
+					
+					// *** Verfication des mots à côtés ***
+					if (coordVerif[0]-1 >= 0) {
+						if (PlateauDeJeu.boutonTab[coordVerif[0]-1][coordVerif[1]].getText().length() == 1) {
+							correct = Controleur.verification(new Integer[]{coordVerif[0]-1, coordVerif[1], 0}, false);
+						}
 					}
-				} catch (Exception e) {System.out.println("Bord du plateau SUD");}
-				try {
-					if (PlateauDeJeu.boutonTab[coordVerif[0]+1][coordVerif[1]].getText().length() == 1) {
-						System.out.println(PlateauDeJeu.boutonTab[coordVerif[0]+1][coordVerif[1]].getText());
-						correct = Controleur.verification(new Integer[]{coordVerif[0]+1, coordVerif[1], 1}, false);
+					if (coordVerif[0]+1 <= 14) {
+						if (PlateauDeJeu.boutonTab[coordVerif[0]+1][coordVerif[1]].getText().length() == 1) {
+							correct = Controleur.verification(new Integer[]{coordVerif[0], coordVerif[1], 0}, false);
+						}
 					}
-				} catch (Exception e) {System.out.println("Bord du plateau NORD");}
-				coordVerif[1] += 1;
+					coordVerif[1] += 1;
+				}
+				else {extremiteMot = true;}	
 			}
+			extremiteMot = false;
 		}
-				
+				  
 		else {
 			
-			while (coordVerif[0] < 15 && PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().length() == 1 && correct) { // Tant que lettre posé
+			while (coordVerif[0] <= 14 && !extremiteMot) {
 				
-				if (!motjoueVerif.isEmpty()) {motjoueVerif.remove(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().toLowerCase());}
-				mot += PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().toLowerCase();
-				
-				// *** Verfication des mots à côtés *
-				try {
-					if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]-1].getText().length() == 1) {
-						correct = Controleur.verification(new Integer[]{coordVerif[0], coordVerif[1]-1, 1}, false);
+				if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().length() == 1) { // Tant que lettre posé
+					if (!motjoueVerif.isEmpty()) {motjoueVerif.remove(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().toLowerCase());}
+					mot += PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().toLowerCase();
+					
+					// *** Verfication des mots à côtés *
+					if (coordVerif[1]-1 >= 0) {
+						if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]-1].getText().length() == 1) {
+							correct = Controleur.verification(new Integer[]{coordVerif[0], coordVerif[1]-1, 1}, false);
+						}
 					}
-				} catch (Exception e) {System.out.println("Bord du plateau WEST");}
-				try {
-					if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]+1].getText().length() == 1) {
-							correct = Controleur.verification(new Integer[]{coordVerif[0], coordVerif[1]+1, 1}, false);
+					if (coordVerif[1]+1 <= 14) {
+						if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]+1].getText().length() == 1) {
+							correct = Controleur.verification(new Integer[]{coordVerif[0], coordVerif[1], 1}, false);
+						}
 					}
-				} catch (Exception e) {System.out.println("Bord du plateau EAST");}
-				coordVerif[0] += 1;
-			}			
+					coordVerif[0] += 1;
+				}
+				else {extremiteMot = true;}		
+			}
+			extremiteMot = false;
 		}
 				
 				// *** Fin de verfication des mots à coté
@@ -133,67 +157,113 @@ public class Controleur implements ContainerListener, ActionListener, ItemListen
 		
 	}
 	
-	public static Integer compterPoint(Integer[] coord) {
+	public static Integer compterPoint(Integer[] coord, boolean deepsearch) {
 		
 		Integer[] coordVerif = coord.clone();
 		int point = 0;
 		int coef = 1;
 		int mot = 0;
-			
-		if (PlateauDeJeu.motjoue.size() == 7) {point += 50;} // SCRABBLE!
+		boolean extremiteMot = false;
 		
-		if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]-1].getText().length() == 1 || PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]+1].getText().length() == 1) {
-			
-			System.out.println("cas 1");
-			
-			while (coordVerif[1] > 0 && PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]-1].getText().length() == 1) {coordVerif[1] -= 1;}
-			while (coordVerif[1] < 15 && PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().length() == 1) { // Tant que lettre posé
-				if (Controleur.estDansLeTab(Vue.MD, coordVerif)) {
-					coef += 1;
-					mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0];
-				}
-				else if (Controleur.estDansLeTab(Vue.MT, coordVerif)) {
-					coef += 2;
-					mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0];
-				}
-				else if (Controleur.estDansLeTab(Vue.LD, coordVerif)) {mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0]*2;}
-				else if (Controleur.estDansLeTab(Vue.LT, coordVerif)) {mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0]*3;}
-				else {mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0];}
-				coordVerif[1] += 1;
-			
+		if (PlateauDeJeu.motjoue.size() == 7 && point == 0) {point += 50;} // SCRABBLE!
+		
+		System.out.println(point);
+		
+		if (coordVerif[2] == 0 || coordVerif[2] == -1) {
+			while (coordVerif[1]-1 >= 0 && !extremiteMot) {
+				if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]-1].getText().length() == 1) {coordVerif[1] -= 1;} // Obtention de la position de départ
+				else {extremiteMot = true;}
 			}
+			extremiteMot = false;
+			
+			while (coordVerif[1] <= 14 && !extremiteMot) {
+				System.out.println("cas 1");
+				if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().length() == 1) {
+					if (Controleur.estDansLeTab(Vue.MD, coordVerif)) {
+						coef += 1;
+						mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0];
+					}
+					else if (Controleur.estDansLeTab(Vue.MT, coordVerif)) {
+						coef += 2;
+						mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0];
+					}
+					else if (Controleur.estDansLeTab(Vue.LD, coordVerif)) {mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0]*2;}
+					else if (Controleur.estDansLeTab(Vue.LT, coordVerif)) {mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0]*3;}
+					else {mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0];}
+					
+					if (coordVerif[0]-1 >= 0) {
+						if (PlateauDeJeu.boutonTab[coordVerif[0]-1][coordVerif[1]].getText().length() == 1 
+								&& Controleur.estDansLeTab(PlateauDeJeu.coordPourAnnuler, new Integer[] {coordVerif[0], coordVerif[1]}) 
+								&& deepsearch) {
+							point += Controleur.compterPoint(new Integer[]{coordVerif[0]-1, coordVerif[1], 1}, false);
+						}
+					}
+					else if (coordVerif[0]+1 <= 14) {
+						if (PlateauDeJeu.boutonTab[coordVerif[0]+1][coordVerif[1]].getText().length() == 1 
+								&& Controleur.estDansLeTab(PlateauDeJeu.coordPourAnnuler, new Integer[] {coordVerif[0], coordVerif[1]})
+								&& deepsearch) {
+							point += Controleur.compterPoint(new Integer[]{coordVerif[0], coordVerif[1], 1}, false);
+						}
+					}
+					coordVerif[1] += 1;
+				}
+				else {extremiteMot = true;}
+			}
+			extremiteMot = false;
+			
+		}
 		
+		else {
+			while (coordVerif[0]-1 >= 0 && !extremiteMot) {
+				if (PlateauDeJeu.boutonTab[coordVerif[0]-1][coordVerif[1]].getText().length() == 1 && !extremiteMot) {coordVerif[0] -= 1;} // Obtention de la position de départ
+				else {extremiteMot = true;}
+			}
+			extremiteMot = false;
+
+			while (coordVerif[0]-1 >= 0 && !extremiteMot) {
+				if (PlateauDeJeu.boutonTab[coordVerif[0]-1][coordVerif[1]].getText().length() == 1) {coordVerif[0] -= 1;} // Obtention de la position de départ
+				else {extremiteMot = true;}
+			}
+			extremiteMot = false;
+			
+			while (coordVerif[0] <= 14 && !extremiteMot) {
+				System.out.println("cas 2");
+				if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().length() == 1) {
+					
+					if (Controleur.estDansLeTab(Vue.MD, coordVerif)) {
+						coef += 1;
+						mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0];
+					}
+					else if (Controleur.estDansLeTab(Vue.MT, coordVerif)) {
+						coef += 2;
+						mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0];
+					}
+					else if (Controleur.estDansLeTab(Vue.LD, coordVerif)) {mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0]*2;}
+					else if (Controleur.estDansLeTab(Vue.LT, coordVerif)) {mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0]*3;}
+					else {mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0];}
+					
+					if (coordVerif[1]-1 >= 0) {
+						if (PlateauDeJeu.boutonTab[coordVerif[1]-1][coordVerif[1]].getText().length() == 1 
+								&& Controleur.estDansLeTab(PlateauDeJeu.coordPourAnnuler, new Integer[] {coordVerif[0], coordVerif[1]})
+								&& deepsearch) {
+							point += Controleur.compterPoint(new Integer[]{coordVerif[1]-1, coordVerif[1], 1}, false);
+						}
+					}
+					if (coordVerif[1]+1 <= 14) {
+						if (PlateauDeJeu.boutonTab[coordVerif[1]+1][coordVerif[1]].getText().length() == 1 
+								&& Controleur.estDansLeTab(PlateauDeJeu.coordPourAnnuler, new Integer[] {coordVerif[0], coordVerif[1]})
+								&& deepsearch) {
+							point += Controleur.compterPoint(new Integer[]{coordVerif[0], coordVerif[1], 1}, false);
+						}
+					}
+					
+					coordVerif[0] += 1;
+				}
+				else {extremiteMot = true;}
+			}
 		}
 		
 		point += mot*coef;
-		
-		coordVerif = coord.clone();
-		coef = 1;
-		mot = 0;
-		
-		if (PlateauDeJeu.boutonTab[coordVerif[0]-1][coordVerif[1]].getText().length() == 1 || PlateauDeJeu.boutonTab[coordVerif[0]+1][coordVerif[1]].getText().length() == 1) {
-			
-			System.out.println("cas 2");
-			
-			while (coordVerif[0] > 0 && PlateauDeJeu.boutonTab[coordVerif[0]-1][coordVerif[1]].getText().length() == 1) {coordVerif[0] -= 1;}
-			while (coordVerif[0] < 15 && PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().length() == 1) { // Tant que lettre posé
-				if (Controleur.estDansLeTab(Vue.MD, coordVerif)) {
-					coef += 1;
-					mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0];
-				}
-				else if (Controleur.estDansLeTab(Vue.MT, coordVerif)) {
-					coef += 2;
-					mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0];
-				}
-				else if (Controleur.estDansLeTab(Vue.LD, coordVerif)) {mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0]*2;}
-				else if (Controleur.estDansLeTab(Vue.LT, coordVerif)) {mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0]*3;}
-				else {mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0];}
-				
-				coordVerif[0] += 1;
-			}
-			
-			point += mot*coef;
-		}
 		
 		return point; 
 	}
@@ -205,7 +275,18 @@ public class Controleur implements ContainerListener, ActionListener, ItemListen
 		}
 		return false;
 	}
+	
+public static boolean estDansLeTab (ArrayList<Integer[]> matrix, Integer[] tab) {
+	
+		Iterator<Integer[]> itr = matrix.iterator();
+		Integer[] test;
+		while (itr.hasNext()) {
+			test = itr.next();
+			if (test[0] == tab[0] && test[1] == tab[1]) {return true;}
+		}
+		return false;
 		
+	}
 
 	@Override
 	public void itemStateChanged(ItemEvent e) {

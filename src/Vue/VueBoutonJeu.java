@@ -76,14 +76,17 @@ public class VueBoutonJeu extends JPanel {
 				 * for (String ch : PlateauDeJeu.nouvMot) { mot += ch; }
 				 */
 
-				Vue.vueDuJeu.historique.ajoutHistorique(mot);
+				Vue.vueDuJeu.historique.ajoutHistorique("Joueur "+Modele.tour+" a joué le mot : "+mot+" ! Ce mot lui rapporte "+ /*indiquer nb points*/ " points !");
 				Modele.tour = (Modele.tour + 1) % Modele.nbrJoueur;
+				Vue.vueDuJeu.historique.ajoutHistorique("C'est à joueur "+Modele.tour+" de jouer !");
 			}
 
 			else if (action == passer) {
-
+				
+				Vue.vueDuJeu.historique.ajoutHistorique("Le joueur "+Modele.tour+" décide de passer son tour !");
 				Modele.tour = (Modele.tour + 1) % Modele.nbrJoueur;
 				Vue.vueDuJeu.mainbouton.main.afficheMain(Modele.tour);
+				Vue.vueDuJeu.historique.ajoutHistorique("C'est à joueur "+Modele.tour+" de jouer !");
 				System.out.println(Modele.tour);
 				// Modele.tour suit le numéro de joueur comme il faut mais manque à afficher la
 				// main du joueur correspondant
@@ -111,6 +114,11 @@ public class VueBoutonJeu extends JPanel {
 								"Scrabble", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 						
 						if (retour==0) { //Cas ou le joueur demande à passer son tour
+							// ATTENTION
+							// A FAIRE
+							//PASSER LE TOUR
+							//ATTENTION
+							
 							// ATTENTION
 							// A FAIRE
 							//PASSER LE TOUR
@@ -176,6 +184,9 @@ public class VueBoutonJeu extends JPanel {
 								//ATTENTION
 								//MANQUE A ACTUALISER LA FENETRE
 							}
+							Vue.vueDuJeu.historique.ajoutHistorique("Le joueur "+Modele.tour+" a décidé de changer ses lettres !");
+							Modele.tour = (Modele.tour + 1) % Modele.nbrJoueur;
+							Vue.vueDuJeu.historique.ajoutHistorique("C'est à joueur "+Modele.tour+" de jouer !");
 						}
 					}
 				}

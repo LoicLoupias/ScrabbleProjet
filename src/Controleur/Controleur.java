@@ -220,11 +220,7 @@ public class Controleur implements ContainerListener, ActionListener, ItemListen
 			}
 			extremiteMot = false;
 
-			while (coordVerif[0]-1 >= 0 && !extremiteMot) {
-				if (PlateauDeJeu.boutonTab[coordVerif[0]-1][coordVerif[1]].getText().length() == 1) {coordVerif[0] -= 1;} // Obtention de la position de départ
-				else {extremiteMot = true;}
-			}
-			extremiteMot = false;
+
 			
 			while (coordVerif[0] <= 14 && !extremiteMot) {
 				System.out.println("cas 2");
@@ -249,7 +245,7 @@ public class Controleur implements ContainerListener, ActionListener, ItemListen
 							point += Controleur.compterPoint(new Integer[]{coordVerif[1]-1, coordVerif[1], 1}, false);
 						}
 					}
-					if (coordVerif[1]+1 <= 14) {
+					else if (coordVerif[1]+1 <= 14) {
 						if (PlateauDeJeu.boutonTab[coordVerif[1]+1][coordVerif[1]].getText().length() == 1 
 								&& Controleur.estDansLeTab(PlateauDeJeu.coordPourAnnuler, new Integer[] {coordVerif[0], coordVerif[1]})
 								&& deepsearch) {

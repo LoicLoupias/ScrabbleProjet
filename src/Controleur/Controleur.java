@@ -335,9 +335,10 @@ public class Controleur implements ContainerListener, ActionListener, ItemListen
 	}
 
 	public static void passer() {
-
+		Vue.vueDuJeu.points.enlevebord(Modele.tour);
 		Modele.tour = (Modele.tour + 1) % Modele.nbrJoueur;
 		Vue.vueDuJeu.mainbouton.main.afficheMain(Modele.tour);
+		Vue.vueDuJeu.points.bord(Modele.tour);
 		
 
 	}

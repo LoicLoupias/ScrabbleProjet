@@ -33,7 +33,7 @@ public class vueLettre extends JPanel {
 		layoutvueLettre.setVgap(15);
 
 		this.setBackground(new Color(0, 200, 0));
-		TitledBorder bordure = new TitledBorder("joueur "+Modele.tour+ "VOS LETTRES :   "+ modele.joueurs[modele.tour].lettre);
+		TitledBorder bordure = new TitledBorder("VOS LETTRES :   ");
 		Font fonttitre = new Font("Arial", Font.BOLD, 15);
 		bordure.setTitleFont(fonttitre);
 		this.setBorder(bordure);

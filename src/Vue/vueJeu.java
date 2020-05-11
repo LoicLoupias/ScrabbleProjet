@@ -8,7 +8,7 @@ import Modele.Modele;
 public class vueJeu extends JPanel {
 	
 	Joueur[] joueur;
-	vuePoints points;
+	public vuePoints points;
 	vueHistorique historique;
 	public static VueLettreBouton mainbouton;
 	

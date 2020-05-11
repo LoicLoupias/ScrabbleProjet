@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Joueur {
 
+	public static String mot;
 	//initialisation des propriétés du joueur
 	public String nom;
 	public int point;

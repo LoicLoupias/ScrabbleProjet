@@ -41,7 +41,7 @@ public class Modele {
 	
 	public enum Etat {EN_COURS, FINI};
 
-	public Etat etat;
+	public static Etat etat;
 
 	public Modele() {
 		DICTIONNAIRE = new HashMap<>();

@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 
 import Controleur.Controleur;
 import Modele.*;
+import Modele.Modele.Etat;
 
 public class VueBoutonJeu extends JPanel {
 	int nblettrechange;
@@ -34,28 +35,28 @@ public class VueBoutonJeu extends JPanel {
 		// initialisation des boutons de jeu
 		valider = new JButton("VALIDER");
 		valider.setBackground(new Color(245, 245, 220));
-		valider.setPreferredSize(new Dimension(200, 35));
+		valider.setPreferredSize(new Dimension(120, 35));
 		valider.setBorder(BorderFactory.createRaisedBevelBorder());
 		valider.addMouseListener(new LettreListener());
 		this.add(valider);
 
 		passer = new JButton("PASSER");
 		passer.setBackground(new Color(245, 245, 220));
-		passer.setPreferredSize(new Dimension(200, 35));
+		passer.setPreferredSize(new Dimension(120, 35));
 		passer.setBorder(BorderFactory.createRaisedBevelBorder());
 		passer.addMouseListener(new LettreListener());
 		this.add(passer);
 
 		changer = new JButton("CHANGER LETTRES");
 		changer.setBackground(new Color(245, 245, 220));
-		changer.setPreferredSize(new Dimension(200, 35));
+		changer.setPreferredSize(new Dimension(120, 35));
 		changer.setBorder(BorderFactory.createRaisedBevelBorder());
 		changer.addMouseListener(new LettreListener());
 		this.add(changer);
 
 		annuler = new JButton("ANNULER");
 		annuler.setBackground(new Color(245, 245, 220));
-		annuler.setPreferredSize(new Dimension(200, 35));
+		annuler.setPreferredSize(new Dimension(120, 35));
 		annuler.setBorder(BorderFactory.createRaisedBevelBorder());
 		annuler.addMouseListener(new LettreListener());
 		this.add(annuler);
@@ -70,15 +71,39 @@ public class VueBoutonJeu extends JPanel {
 			// boutton activer affiche le mot dans l'historique (pour le moment)
 			action = (JButton) e.getSource();
 			if (action == valider) {
-				mot = new String();
-
-				/*
-				 * for (String ch : PlateauDeJeu.nouvMot) { mot += ch; }
-				 */
-
-				Vue.vueDuJeu.historique.ajoutHistorique("Joueur "+Modele.tour+" a joué le mot : "+mot+" ! Ce mot lui rapporte "+ /*indiquer nb points*/ " points !");
-				Controleur.passer();
-				Vue.vueDuJeu.historique.ajoutHistorique("C'est à joueur "+Modele.tour+" de jouer !");
+				if (Controleur.verification(PlateauDeJeu.coord, true)) {
+					
+					Modele.joueurs[Modele.tour].point += Controleur.compterPoint(PlateauDeJeu.coord, true);
+					Vue.vueDuJeu.historique.ajoutHistorique("Joueur "+Modele.tour+" a joué le mot : "+Modele.joueurs[Modele.tour].mot+" ! Ce mot lui rapporte "+ Modele.joueurs[Modele.tour].point + " points !");
+					
+					if (Pioche.lettrePioche.size() > 0) {
+						Modele.joueurs[Modele.tour].piocher();
+					}
+					
+					else if (Modele.joueurs[Modele.tour].lettre.size() == 0) {
+						Modele.etat = Etat.FINI;
+					}
+					
+					Integer[] c;
+					
+					while (PlateauDeJeu.coordPourAnnuler.size() > 0) {
+						c = PlateauDeJeu.coordPourAnnuler.remove(0);
+						System.out.println(c[0] + "" + c[1]);
+						Modele.joueurs[Modele.tour].lettre.remove((Character) PlateauDeJeu.boutonTab[c[0]][c[1]].getText().charAt(0));
+						System.out.println("test");
+					}
+					
+					PlateauDeJeu.coord = new Integer[]{-1, -1, -1};
+					PlateauDeJeu.motjoue = new ArrayList<String>();
+					
+					Controleur.passer();
+					Vue.vueDuJeu.historique.ajoutHistorique("C'est à joueur "+Modele.tour+" de jouer !");
+					
+				}
+				else {
+					Vue.vueDuJeu.historique.ajoutHistorique("Mot invalide !");
+					action = annuler;
+				}
 			}
 
 			else if (action == passer) {

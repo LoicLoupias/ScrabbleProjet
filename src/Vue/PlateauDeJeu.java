@@ -108,7 +108,8 @@ public class PlateauDeJeu extends JPanel {
 				coordPourAnnuler.add(c);
 				
 				caseajouer.setText(vueLettre.lettreajouer);		
-				caseajouer.setFont(new Font("Arial", Font.PLAIN, 40));
+				caseajouer.setFont(new Font("Arial", Font.PLAIN, 36));
+				caseajouer.setForeground(Color.BLACK);
 				caseajouer.setBackground(Color.yellow);//mis en vu du jeton posé
 
 				vueLettre.lettreajouer = null;//réinitialisation de lettreajouer pour les prochains jetons à placer

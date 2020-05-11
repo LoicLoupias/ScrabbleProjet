@@ -57,6 +57,8 @@ public class vueLettre extends JPanel {
 
 		for (int i = 0; i < this.joueur[numeroJ].lettre.size(); i++) {
 			this.lettres[i].setText(Character.toString(joueur[numeroJ].lettre.get(i)));
+			this.lettres[i].setFont(new Font("Arial", Font.PLAIN, 36));
+			this.lettres[i].setForeground(Color.BLACK);
 			this.lettres[i].setVisible(true);
 		}
 		

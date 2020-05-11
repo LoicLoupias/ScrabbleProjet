@@ -7,6 +7,7 @@ import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import Modele.Joueur;
@@ -16,6 +17,7 @@ public class vuePoints extends JPanel {
 
 	Joueur[] joueur;
 	public JPanel[] pointJoueur;
+	public JPanel pointTab;
 
 	public vuePoints(Joueur[] jou) {
 
@@ -29,7 +31,7 @@ public class vuePoints extends JPanel {
 		for (int i = 0; i < joueur.length; i++) {
 			pointJoueur[i] = new JPanel();
 			pointJoueur[i].setLayout(new BoxLayout(pointJoueur[i], BoxLayout.Y_AXIS));
-			pointJoueur[i].setPreferredSize(new Dimension(100, 50));
+			pointJoueur[i].setPreferredSize(new Dimension(120, 50));
 
 			JLabel nomJ = new JLabel(joueur[i].nom);
 			Font fontnomJ = new Font("Arial", Font.BOLD, 16);
@@ -48,16 +50,19 @@ public class vuePoints extends JPanel {
 				pointJoueur[i].setBorder(BorderFactory.createLineBorder(Color.white, 5));
 			} else if (i == 1) {
 				pointJoueur[i].setBackground(new Color(15, 157, 232));
+				pointJoueur[i].setBorder(BorderFactory.createLineBorder(Color.black, 2));
 			} else if (i == 2) {
 				pointJoueur[i].setBackground(Color.pink);
+				pointJoueur[i].setBorder(BorderFactory.createLineBorder(Color.black, 2));
 			} else {
 				pointJoueur[i].setBackground(Color.ORANGE);
+				pointJoueur[i].setBorder(BorderFactory.createLineBorder(Color.black, 2));
 			}
 			
 
 		}
 
-		JPanel pointTab = new JPanel();
+		pointTab = new JPanel();
 		pointTab.setBackground(new Color(0, 200, 0));
 		pointTab.setLayout(new FlowLayout());
 		pointTab.add(Box.createRigidArea(new Dimension(25, 10)));
@@ -79,8 +84,8 @@ public class vuePoints extends JPanel {
 
 	}
 	public void enlevebord(int i) {
-		pointJoueur[i].setBorder(BorderFactory.createLineBorder(Color.black, 0)); 
-		pointJoueur[i].setSize(100, 50);
+		pointJoueur[i].setBorder(BorderFactory.createLineBorder(Color.black, 2)); 
+		//pointJoueur[i].setSize(100, 50);
 		
 
 	}
@@ -88,6 +93,25 @@ public class vuePoints extends JPanel {
 		
 		
 		pointJoueur[i].setBorder(BorderFactory.createLineBorder(Color.white, 5));
+		
+	}
+	
+	public void actualiserpoints() {
+		pointJoueur[Modele.tour].removeAll();
+		
+		JLabel nomJ2 = new JLabel(joueur[Modele.tour].nom);
+		Font fontnomJ2 = new Font("Arial", Font.BOLD, 16);
+		nomJ2.setAlignmentX(CENTER_ALIGNMENT);
+		nomJ2.setFont(fontnomJ2);
+
+		
+		JLabel pointJ2 = new JLabel(Integer.toString(joueur[Modele.tour].point));
+		Font fontpointJ2 = new Font("Arial", Font.BOLD, 16);
+		pointJ2.setFont(fontpointJ2);
+		pointJ2.setAlignmentX(CENTER_ALIGNMENT);
+		
+		pointJoueur[Modele.tour].add(nomJ2);
+		pointJoueur[Modele.tour].add(pointJ2);
 		
 	}
 

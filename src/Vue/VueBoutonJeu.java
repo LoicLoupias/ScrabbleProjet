@@ -35,28 +35,28 @@ public class VueBoutonJeu extends JPanel {
 		// initialisation des boutons de jeu
 		valider = new JButton("VALIDER");
 		valider.setBackground(new Color(245, 245, 220));
-		valider.setPreferredSize(new Dimension(120, 35));
+		valider.setPreferredSize(new Dimension(150, 35));
 		valider.setBorder(BorderFactory.createRaisedBevelBorder());
 		valider.addMouseListener(new LettreListener());
 		this.add(valider);
 
 		passer = new JButton("PASSER");
 		passer.setBackground(new Color(245, 245, 220));
-		passer.setPreferredSize(new Dimension(120, 35));
+		passer.setPreferredSize(new Dimension(150, 35));
 		passer.setBorder(BorderFactory.createRaisedBevelBorder());
 		passer.addMouseListener(new LettreListener());
 		this.add(passer);
 
 		changer = new JButton("CHANGER LETTRES");
 		changer.setBackground(new Color(245, 245, 220));
-		changer.setPreferredSize(new Dimension(120, 35));
+		changer.setPreferredSize(new Dimension(150, 35));
 		changer.setBorder(BorderFactory.createRaisedBevelBorder());
 		changer.addMouseListener(new LettreListener());
 		this.add(changer);
 
 		annuler = new JButton("ANNULER");
 		annuler.setBackground(new Color(245, 245, 220));
-		annuler.setPreferredSize(new Dimension(120, 35));
+		annuler.setPreferredSize(new Dimension(150, 35));
 		annuler.setBorder(BorderFactory.createRaisedBevelBorder());
 		annuler.addMouseListener(new LettreListener());
 		this.add(annuler);
@@ -75,6 +75,8 @@ public class VueBoutonJeu extends JPanel {
 					
 					Modele.joueurs[Modele.tour].point += Controleur.compterPoint(PlateauDeJeu.coord, true);
 					Vue.vueDuJeu.historique.ajoutHistorique("Joueur "+Modele.tour+" a joué le mot : "+Modele.joueurs[Modele.tour].mot+" ! Ce mot lui rapporte "+ Modele.joueurs[Modele.tour].point + " points !");
+					System.out.println(Modele.joueurs[Modele.tour].nom + "nb de points : "+ Modele.joueurs[Modele.tour].point);
+					Vue.vueDuJeu.points.actualiserpoints();
 					
 					if (Pioche.lettrePioche.size() > 0) {
 						Modele.joueurs[Modele.tour].piocher();
@@ -204,14 +206,6 @@ public class VueBoutonJeu extends JPanel {
 								//System.out.println("Etat de la pioche :" +Pioche.lettrePioche);
 								Collections.shuffle(Pioche.lettrePioche);
 								//System.out.println("Etat de la pioche :" +Pioche.lettrePioche);
-								
-								
-								//ATTENTION
-								//MANQUE A ACTUALISER LA FENETRE
-								
-								
-								
-								
 							}
 							
 							Vue.vueDuJeu.historique.ajoutHistorique("Le joueur "+Modele.tour+" a décidé de changer ses lettres !");

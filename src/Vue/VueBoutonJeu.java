@@ -92,7 +92,7 @@ public class VueBoutonJeu extends JPanel {
 						Modele.etat = Etat.FINI;
 					}
 
-					Integer[] c;
+					Integer[] c = new Integer[2];
 
 					while (PlateauDeJeu.coordPourAnnuler.size() > 0) {
 						c = PlateauDeJeu.coordPourAnnuler.remove(0);

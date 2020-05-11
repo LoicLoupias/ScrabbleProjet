@@ -33,17 +33,31 @@ public static boolean verification(Integer[] coord, boolean m_i) {
 		motjoueVerif = (ArrayList<String>) PlateauDeJeu.motjoue.clone();
 		
 		String mot = new String();
-		boolean correct = Controleur.estDansLeTab(PlateauDeJeu.coordPourAnnuler, new Integer[] {7, 7});
+		boolean correct = (Controleur.estDansLeTab(PlateauDeJeu.coordPourAnnuler, new Integer[] {7, 7}));
 		
 		boolean extremiteMot = false;
 		boolean mot_initial = m_i;
+
 		
 		if (coordVerif[2] == -1) {
-			if (coordVerif[0]-1 >= 0) {if (PlateauDeJeu.boutonTab[coordVerif[0]-1][coordVerif[1]].getText().length() == 1) {System.out.println("t1");coordVerif[2] = 0;} }
-			else if (coordVerif[0]+1 <= 14) {if (PlateauDeJeu.boutonTab[coordVerif[0]+1][coordVerif[1]].getText().length() == 1) {System.out.println("t2");coordVerif[2] = 0;} }
-			else if (coordVerif[1]-1 >= 0) {if (PlateauDeJeu.boutonTab[coordVerif[0]-1][coordVerif[1]].getText().length() == 1) {System.out.println("t3");coordVerif[2] = 1;}}
-			else if (coordVerif[1]+1 <= 14) {if (PlateauDeJeu.boutonTab[coordVerif[0]+1][coordVerif[1]].getText().length() == 1) {System.out.println("t3");coordVerif[2] = 1;}}
-			else {coordVerif[2] = 0;System.out.println();}
+			if (coordVerif[1]-1 >= 0) {
+				if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]-1].getText().length() == 1) {
+					coordVerif[2] = 0;
+					System.out.println("dz " + PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]-1].getText());
+
+				} 
+				System.out.println("ok");
+			}
+			if (coordVerif[1]+1 <= 14 && coordVerif[2] == -1) {
+				if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]+1].getText().length() == 1) {
+					coordVerif[2] = 0;
+					System.out.println("dzq " + PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]+1].getText());
+				}
+			}
+			if (coordVerif[2] == -1) {
+				coordVerif[2] = 1;
+				System.out.println("dzszq " + PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText());
+			}
 		}
 		System.out.println("axe fixe " + coordVerif[2]);
 		if (coordVerif[2] == 0) {
@@ -54,7 +68,7 @@ public static boolean verification(Integer[] coord, boolean m_i) {
 			extremiteMot = false;
 			
 		}
-		else {
+		else if (coordVerif[2] == 1) {
 			while (coordVerif[0]-1 >= 0 && !extremiteMot) {
 				if (PlateauDeJeu.boutonTab[coordVerif[0]-1][coordVerif[1]].getText().length() == 1 && !extremiteMot) {coordVerif[0] -= 1;} // Obtention de la position de départ
 				else {extremiteMot = true;}
@@ -62,7 +76,6 @@ public static boolean verification(Integer[] coord, boolean m_i) {
 			extremiteMot = false;
 		}
 		
-		System.out.println(coord[0]+""+coord[1]);
 		if (!mot_initial) { // On ne parcourt pas tous les mots accolés si ce n'est pas le mot initial
 			if (coordVerif[2] == 0) {
 				while (coordVerif[1] <= 14 && !extremiteMot) {
@@ -86,12 +99,10 @@ public static boolean verification(Integer[] coord, boolean m_i) {
 				}
 				extremiteMot = false;
 			}
-			System.out.println("mot externe: " + mot);
 			return Modele.DICTIONNAIRE.containsKey(mot);
 		}
 		
 		else if (coordVerif[2] == 0) { // Cas du mot initial
-			
 			
 			while (coordVerif[1] <= 14 && !extremiteMot) {
 				
@@ -99,22 +110,30 @@ public static boolean verification(Integer[] coord, boolean m_i) {
 					if (!motjoueVerif.isEmpty()) {motjoueVerif.remove(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().toLowerCase());}
 					mot += PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().toLowerCase();
 					
+					System.out.println(PlateauDeJeu.boutonTab[coordVerif[0]-1][coordVerif[1]].getText());
+					System.out.println(PlateauDeJeu.boutonTab[coordVerif[0]+1][coordVerif[1]].getText());
+					System.out.println(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]-1].getText());
+					System.out.println(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]+1].getText());
+					
+					
 					// *** Verfication des mots à côtés ***
+					/*
 					if (coordVerif[0]-1 >= 0) {
 						if (PlateauDeJeu.boutonTab[coordVerif[0]-1][coordVerif[1]].getText().length() == 1) {
 							System.out.println(coordVerif[0] +" "+coordVerif[1]);
 							System.out.println("d1");
-							System.out.println(PlateauDeJeu.boutonTab[coordVerif[0]-1][coordVerif[1]].getText());
-							correct = Controleur.verification(new Integer[]{coordVerif[0]-1, coordVerif[1], 1}, false);
+							System.out.println(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText());
+							correct = Controleur.verification(new Integer[]{coordVerif[0], coordVerif[1], 1}, false);
 						}
 					}
-					if (coordVerif[0]+1 <= 14) {
+					else if (coordVerif[0]+1 <= 14) {
 						if (PlateauDeJeu.boutonTab[coordVerif[0]+1][coordVerif[1]].getText().length() == 1) {
 							System.out.println("d2");
 							System.out.println(PlateauDeJeu.boutonTab[coordVerif[0]+1][coordVerif[1]].getText());
 							correct = Controleur.verification(new Integer[]{coordVerif[0], coordVerif[1], 1}, false);
 						}
 					}
+					*/
 					coordVerif[1] += 1;
 				}
 				else {extremiteMot = true;}	
@@ -131,16 +150,18 @@ public static boolean verification(Integer[] coord, boolean m_i) {
 					mot += PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().toLowerCase();
 					
 					// *** Verfication des mots à côtés *
+					/*
 					if (coordVerif[1]-1 >= 0) {
 						if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]-1].getText().length() == 1) {
 							correct = Controleur.verification(new Integer[]{coordVerif[0], coordVerif[1]-1, 0}, false);
 						}
 					}
-					if (coordVerif[1]+1 <= 14) {
+					else if (coordVerif[1]+1 <= 14) {
 						if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]+1].getText().length() == 1) {
 							correct = Controleur.verification(new Integer[]{coordVerif[0], coordVerif[1], 0}, false);
 						}
 					}
+					*/
 					coordVerif[0] += 1;
 				}
 				else {extremiteMot = true;}		
@@ -150,6 +171,7 @@ public static boolean verification(Integer[] coord, boolean m_i) {
 				
 				// *** Fin de verfication des mots à coté
 		extremiteMot = false;	
+		System.out.println(mot);
 		if (!Modele.DICTIONNAIRE.containsKey(mot) || !motjoueVerif.isEmpty()) {return false;}
 		else {if (mot_initial) {Modele.joueurs[Modele.tour].mot = mot;}}
 		return correct;

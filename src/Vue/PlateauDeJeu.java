@@ -51,7 +51,7 @@ public class PlateauDeJeu extends JPanel {
 		
 		for (int n=0; n<Vue.MD.length;n++) {
 			boutonTab[Vue.MD[n][0]][Vue.MD[n][1]].setBackground(Color.PINK);
-			boutonTab[Vue.MD[n][0]][Vue.MD[n][1]].setText("MD");
+			boutonTab[Vue.MD[n][0]][Vue.MD[n][1]].setText("MD");	
 		}
 		for (int n=0; n<Vue.LD.length;n++) {
 			boutonTab[Vue.LD[n][0]][Vue.LD[n][1]].setBackground(Color.CYAN);
@@ -88,14 +88,12 @@ public class PlateauDeJeu extends JPanel {
 				}
 				else if (coord[2] == -1) {
 					if (coord[0] != c[0] && coord[1] != c[1]) {
-						System.out.println("Pas Bien! 1");
 						return;
 					}
 					else if (coord[0] == c[0]) {coord[2] = 0;}
 					else {coord[2] = 1;}
 				}
 				else if (coord[coord[2]] != c[coord[2]]) {
-						System.out.println("Pas Bien!");
 						return;
 				}
 				

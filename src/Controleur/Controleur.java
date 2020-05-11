@@ -26,21 +26,26 @@ public class Controleur implements ContainerListener, ActionListener, ItemListen
 
 	}
 
-public static boolean verification(Integer[] coord, boolean deepsearch) {
+public static boolean verification(Integer[] coord, boolean m_i) {
 		
-		Integer[] coordVerif = coord.clone();; 
+		Integer[] coordVerif = coord.clone();
 		ArrayList<String> motjoueVerif = new ArrayList<String>();
 		motjoueVerif = (ArrayList<String>) PlateauDeJeu.motjoue.clone();
 		
 		String mot = new String();
 		boolean correct = Controleur.estDansLeTab(PlateauDeJeu.coordPourAnnuler, new Integer[] {7, 7});
-
-		System.out.println(correct);
 		
-		boolean extremiteMot = false; 
+		boolean extremiteMot = false;
+		boolean mot_initial = m_i;
 		
-		if (coordVerif[2] == -1) {coordVerif[2] = 0;}
-		
+		if (coordVerif[2] == -1) {
+			if (coordVerif[0]-1 >= 0) {if (PlateauDeJeu.boutonTab[coordVerif[0]-1][coordVerif[1]].getText().length() == 1) {System.out.println("t1");coordVerif[2] = 0;} }
+			else if (coordVerif[0]+1 <= 14) {if (PlateauDeJeu.boutonTab[coordVerif[0]+1][coordVerif[1]].getText().length() == 1) {System.out.println("t2");coordVerif[2] = 0;} }
+			else if (coordVerif[1]-1 >= 0) {if (PlateauDeJeu.boutonTab[coordVerif[0]-1][coordVerif[1]].getText().length() == 1) {System.out.println("t3");coordVerif[2] = 1;}}
+			else if (coordVerif[1]+1 <= 14) {if (PlateauDeJeu.boutonTab[coordVerif[0]+1][coordVerif[1]].getText().length() == 1) {System.out.println("t3");coordVerif[2] = 1;}}
+			else {coordVerif[2] = 0;System.out.println();}
+		}
+		System.out.println("axe fixe " + coordVerif[2]);
 		if (coordVerif[2] == 0) {
 			while (coordVerif[1]-1 >= 0 && !extremiteMot) {
 				if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]-1].getText().length() == 1) {coordVerif[1] -= 1;} // Obtention de la position de départ
@@ -57,29 +62,31 @@ public static boolean verification(Integer[] coord, boolean deepsearch) {
 			extremiteMot = false;
 		}
 		
-		
-		if (!deepsearch) { // On ne parcourt pas tous les mots accolés si ce n'est pas le mot initial
+		System.out.println(coord[0]+""+coord[1]);
+		if (!mot_initial) { // On ne parcourt pas tous les mots accolés si ce n'est pas le mot initial
 			if (coordVerif[2] == 0) {
 				while (coordVerif[1] <= 14 && !extremiteMot) {
-					if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().length() == 1) {
+					if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().length() == 1) { // Tant que lettre posé
+						if (!motjoueVerif.isEmpty()) {motjoueVerif.remove(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().toLowerCase());}
 						mot += PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().toLowerCase();
 						coordVerif[1] += 1;
 					}
-					else {extremiteMot = true;}
-				}
-				extremiteMot = false; 
-			}
-			else {
-				while (coordVerif[0] <= 14  && !extremiteMot) {
-					if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().length() == 1) {
-						coordVerif[0] += 1;
-						mot += PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().toLowerCase();
-					}
-					else {extremiteMot = true;}
+					else {extremiteMot = true;}	
 				}
 				extremiteMot = false;
 			}
-			System.out.println("deepseach");
+			else {
+				while (coordVerif[0] <= 14 && !extremiteMot) {
+					if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().length() == 1) { // Tant que lettre posé
+						if (!motjoueVerif.isEmpty()) {motjoueVerif.remove(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().toLowerCase());}
+						mot += PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().toLowerCase();
+						coordVerif[0] += 1;
+					}
+					else {extremiteMot = true;}	
+				}
+				extremiteMot = false;
+			}
+			System.out.println("mot externe: " + mot);
 			return Modele.DICTIONNAIRE.containsKey(mot);
 		}
 		
@@ -89,19 +96,23 @@ public static boolean verification(Integer[] coord, boolean deepsearch) {
 			while (coordVerif[1] <= 14 && !extremiteMot) {
 				
 				if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().length() == 1) { // Tant que lettre posé
-					
 					if (!motjoueVerif.isEmpty()) {motjoueVerif.remove(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().toLowerCase());}
 					mot += PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().toLowerCase();
 					
 					// *** Verfication des mots à côtés ***
 					if (coordVerif[0]-1 >= 0) {
 						if (PlateauDeJeu.boutonTab[coordVerif[0]-1][coordVerif[1]].getText().length() == 1) {
-							correct = Controleur.verification(new Integer[]{coordVerif[0]-1, coordVerif[1], 0}, false);
+							System.out.println(coordVerif[0] +" "+coordVerif[1]);
+							System.out.println("d1");
+							System.out.println(PlateauDeJeu.boutonTab[coordVerif[0]-1][coordVerif[1]].getText());
+							correct = Controleur.verification(new Integer[]{coordVerif[0]-1, coordVerif[1], 1}, false);
 						}
 					}
 					if (coordVerif[0]+1 <= 14) {
 						if (PlateauDeJeu.boutonTab[coordVerif[0]+1][coordVerif[1]].getText().length() == 1) {
-							correct = Controleur.verification(new Integer[]{coordVerif[0], coordVerif[1], 0}, false);
+							System.out.println("d2");
+							System.out.println(PlateauDeJeu.boutonTab[coordVerif[0]+1][coordVerif[1]].getText());
+							correct = Controleur.verification(new Integer[]{coordVerif[0], coordVerif[1], 1}, false);
 						}
 					}
 					coordVerif[1] += 1;
@@ -122,12 +133,12 @@ public static boolean verification(Integer[] coord, boolean deepsearch) {
 					// *** Verfication des mots à côtés *
 					if (coordVerif[1]-1 >= 0) {
 						if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]-1].getText().length() == 1) {
-							correct = Controleur.verification(new Integer[]{coordVerif[0], coordVerif[1]-1, 1}, false);
+							correct = Controleur.verification(new Integer[]{coordVerif[0], coordVerif[1]-1, 0}, false);
 						}
 					}
 					if (coordVerif[1]+1 <= 14) {
 						if (PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]+1].getText().length() == 1) {
-							correct = Controleur.verification(new Integer[]{coordVerif[0], coordVerif[1], 1}, false);
+							correct = Controleur.verification(new Integer[]{coordVerif[0], coordVerif[1], 0}, false);
 						}
 					}
 					coordVerif[0] += 1;
@@ -138,15 +149,14 @@ public static boolean verification(Integer[] coord, boolean deepsearch) {
 		}
 				
 				// *** Fin de verfication des mots à coté
-				
+		extremiteMot = false;	
 		if (!Modele.DICTIONNAIRE.containsKey(mot) || !motjoueVerif.isEmpty()) {return false;}
-		else {if (deepsearch) {Modele.joueurs[Modele.tour].mot = mot;}}
-		
+		else {if (mot_initial) {Modele.joueurs[Modele.tour].mot = mot;}}
 		return correct;
 		
 	}
 	
-	public static Integer compterPoint(Integer[] coord, boolean deepsearch) {
+	public static Integer compterPoint(Integer[] coord, boolean mot_initial) {
 		
 		Integer[] coordVerif = coord.clone();
 		int point = 0;
@@ -168,26 +178,34 @@ public static boolean verification(Integer[] coord, boolean deepsearch) {
 					if (Controleur.estDansLeTab(Vue.MD, coordVerif)) {
 						coef += 1;
 						mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0];
+						Controleur.retirerDuTab(Vue.MD, coordVerif);
 					} 
 					else if (Controleur.estDansLeTab(Vue.MT, coordVerif)) {
 						coef += 2;
 						mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0];
+						Controleur.retirerDuTab(Vue.MT, coordVerif);
 					}
-					else if (Controleur.estDansLeTab(Vue.LD, coordVerif)) {mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0]*2;}
-					else if (Controleur.estDansLeTab(Vue.LT, coordVerif)) {mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0]*3;}
+					else if (Controleur.estDansLeTab(Vue.LD, coordVerif)) {
+						mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0]*2;
+						Controleur.retirerDuTab(Vue.LD, coordVerif);
+					}
+					else if (Controleur.estDansLeTab(Vue.LT, coordVerif)) {
+						mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0]*3;
+						Controleur.retirerDuTab(Vue.LT, coordVerif);
+					}
 					else {mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0];}
 					
 					if (coordVerif[0]-1 >= 0) {
 						if (PlateauDeJeu.boutonTab[coordVerif[0]-1][coordVerif[1]].getText().length() == 1 
 								&& Controleur.estDansLeTab(PlateauDeJeu.coordPourAnnuler, new Integer[] {coordVerif[0], coordVerif[1]}) 
-								&& deepsearch) {
+								&& mot_initial) {
 							point += Controleur.compterPoint(new Integer[]{coordVerif[0]-1, coordVerif[1], 1}, false);
 						}
 					}
 					else if (coordVerif[0]+1 <= 14) {
 						if (PlateauDeJeu.boutonTab[coordVerif[0]+1][coordVerif[1]].getText().length() == 1 
 								&& Controleur.estDansLeTab(PlateauDeJeu.coordPourAnnuler, new Integer[] {coordVerif[0], coordVerif[1]})
-								&& deepsearch) {
+								&& mot_initial) {
 							point += Controleur.compterPoint(new Integer[]{coordVerif[0], coordVerif[1], 1}, false);
 						}
 					}
@@ -214,26 +232,34 @@ public static boolean verification(Integer[] coord, boolean deepsearch) {
 					if (Controleur.estDansLeTab(Vue.MD, coordVerif)) {
 						coef += 1;
 						mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0];
+						Controleur.retirerDuTab(Vue.MD, coordVerif);
 					}
 					else if (Controleur.estDansLeTab(Vue.MT, coordVerif)) {
 						coef += 2;
 						mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0];
+						Controleur.retirerDuTab(Vue.MT, coordVerif);
 					}
-					else if (Controleur.estDansLeTab(Vue.LD, coordVerif)) {mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0]*2;}
-					else if (Controleur.estDansLeTab(Vue.LT, coordVerif)) {mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0]*3;}
+					else if (Controleur.estDansLeTab(Vue.LD, coordVerif)) {
+						mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0]*2;
+						Controleur.retirerDuTab(Vue.LD, coordVerif);
+					}
+					else if (Controleur.estDansLeTab(Vue.LT, coordVerif)) {
+						mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0]*3;
+						Controleur.retirerDuTab(Vue.LT, coordVerif);
+					}
 					else {mot += Modele.LETTRES.get(PlateauDeJeu.boutonTab[coordVerif[0]][coordVerif[1]].getText().charAt(0))[0];}
 					
 					if (coordVerif[1]-1 >= 0) {
 						if (PlateauDeJeu.boutonTab[coordVerif[1]-1][coordVerif[1]].getText().length() == 1 
 								&& Controleur.estDansLeTab(PlateauDeJeu.coordPourAnnuler, new Integer[] {coordVerif[0], coordVerif[1]})
-								&& deepsearch) {
+								&& mot_initial) {
 							point += Controleur.compterPoint(new Integer[]{coordVerif[1]-1, coordVerif[1], 1}, false);
 						}
 					}
 					else if (coordVerif[1]+1 <= 14) {
 						if (PlateauDeJeu.boutonTab[coordVerif[1]+1][coordVerif[1]].getText().length() == 1 
 								&& Controleur.estDansLeTab(PlateauDeJeu.coordPourAnnuler, new Integer[] {coordVerif[0], coordVerif[1]})
-								&& deepsearch) {
+								&& mot_initial) {
 							point += Controleur.compterPoint(new Integer[]{coordVerif[0], coordVerif[1], 1}, false);
 						}
 					}
@@ -268,14 +294,21 @@ public static boolean verification(Integer[] coord, boolean deepsearch) {
 		return false;
 		
 	}
+	
+	public static void retirerDuTab (int[][] matrix, Integer[] tab) {
+		
+		for (int i = 0; i < matrix.length; i++) {
+			if (matrix[i][0] == tab[0] && matrix[i][1] == tab[1]) {matrix[i] = new int[] {-1,-1};}
+		}
+	}
+	
 
 	public static void passer() {
 		Vue.vueDuJeu.points.enlevebord(Modele.tour);
 	
 		Modele.tour = (Modele.tour + 1) % Modele.nbrJoueur;
 		Vue.vueDuJeu.mainbouton.main.afficheMain(Modele.tour);
-		Vue.vueDuJeu.points.bord(Modele.tour);
-		
+		Vue.vueDuJeu.points.bord(Modele.tour);	
 
 	}
 

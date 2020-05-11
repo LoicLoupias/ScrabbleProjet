@@ -80,7 +80,7 @@ public class Vue extends JFrame {
 	    
 	    
 	    
-	    JOptionPane.showMessageDialog(null, "que le dudududu duel !!!", "Scrabble", JOptionPane.NO_OPTION);
+	    JOptionPane.showMessageDialog(null, "Début du jeu", "Scrabble", JOptionPane.NO_OPTION);
 	    
 	    vueDuJeu.mainbouton.main.afficheMain(modele.tour);
 	}

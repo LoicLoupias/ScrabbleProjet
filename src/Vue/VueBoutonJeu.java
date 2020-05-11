@@ -104,9 +104,10 @@ public class VueBoutonJeu extends JPanel {
 					Vue.vueDuJeu.historique.ajoutHistorique("Mot invalide !");
 					action = annuler;
 				}
+				
 			}
 
-			else if (action == passer) {
+			if (action == passer) {
 				
 				Vue.vueDuJeu.historique.ajoutHistorique("Le joueur "+Modele.tour+" décide de passer son tour !");
 				Controleur.passer();

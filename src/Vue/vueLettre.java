@@ -18,7 +18,7 @@ import Modele.Modele;
 public class vueLettre extends JPanel {
 
 	static Joueur[] joueur;
-	static JButton[] lettres;
+	public static JButton[] lettres;
 	public static JButton boutonajouer;
 	public static String lettreajouer;
 
@@ -58,6 +58,7 @@ public class vueLettre extends JPanel {
 		for (int i = 0; i < this.joueur[numeroJ].lettre.size(); i++) {
 			this.lettres[i].setText(Character.toString(joueur[numeroJ].lettre.get(i)));
 			this.lettres[i].setVisible(true);
+			this.lettres[i].setEnabled(true);
 		}
 		
 		vueJeu.mainbouton.updateUI();

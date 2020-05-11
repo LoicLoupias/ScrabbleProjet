@@ -67,7 +67,6 @@ public class Modele {
 		}
 		
 		System.out.println(Float.parseFloat(new SimpleDateFormat("ss.SSS").format(new Date())) - t + "s pour créer le dictionnaire");
-		System.out.println(DICTIONNAIRE.size());
 		
 		//debut du jeu 
 		
@@ -91,13 +90,8 @@ public class Modele {
 	    for (int i = 1; i<=nbrJoueur; i++) {
 	        joueurs[i-1] = new Joueur(JOptionPane.showInputDialog(null, "Entrez le nom pour le joueur " + i + " :", "Scrabble", JOptionPane.QUESTION_MESSAGE ), new ArrayList<Character>());
 	        joueurs[i-1].piocher();
-	        System.out.println(joueurs[i-1].lettre);
-	        System.out.println(joueurs[0].lettre);
 	        
 	    }
-	    
-	    System.out.println(Modele.joueurs[0].lettre);
-	    System.out.println(Modele.joueurs[1].lettre);
 
 		this.tour = 0;
 
